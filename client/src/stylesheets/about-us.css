@@ -6,11 +6,11 @@
     height: 100%;
 }
 .leftbox {
-   
     height: 100%;
     padding-left: 3%;
-    padding-top: 3%;
+    padding-top: 2.4%;
 }
+
 .rightbox {
     height: 100%;
     padding-top: 2.4%;
@@ -21,4 +21,7 @@
     width: 90%;
     height: 86%;
     border: 1px solid;
+    background-image: url('../images/capsule.jpg');
+    background-size: cover;
+    background-position: center;
 }

@@ -1,6 +1,7 @@
 .main-image {
-    height: 450px;
-    background-image: url('../images/main-image.jpg');
+    height: 400px;
+    background-image: url('../images/img1.png');
+    background-color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

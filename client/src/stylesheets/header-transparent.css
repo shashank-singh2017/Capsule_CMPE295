@@ -1,8 +1,14 @@
 .main-box {
     width: 100%;
     padding: 0;
+    background : transparent;
+    color: white;
 }
 
 .container-fluid {
     padding: 0;
+}
+
+.nav-item {
+    margin-left: 25px;
 }
