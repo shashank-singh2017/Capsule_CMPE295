@@ -1,0 +1,24 @@
+.main-box {
+    height: 400px;
+}
+
+.box-aboutus {
+    height: 100%;
+}
+.leftbox {
+   
+    height: 100%;
+    padding-left: 3%;
+    padding-top: 3%;
+}
+.rightbox {
+    height: 100%;
+    padding-top: 2.4%;
+    padding-left: 3%
+}
+
+.image-box {
+    width: 90%;
+    height: 86%;
+    border: 1px solid;
+}
