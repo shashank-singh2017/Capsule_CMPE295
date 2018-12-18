@@ -12,9 +12,7 @@ In this prototype by using web3 js, our web application is interacting with smar
 2. Read the transaction smart contract (which will be used for our supply chain transactions).
 3. Sign and broadcast the transaction to the test network. Once completed we can see the transaction block added on our test network.
 4. Deploy the contract to the test networks.
-5. Write new data and store the block on the blockchain.
-6.
-7.
-8.
+5. Write new data and store the block on the blockchain. Also checks balances for the ethereum accounts after each transaction.
+6. Fetch important data like // get latest block number in the blockchain // get latest 10 blocks // get transaction from specific block
 
 Through web3js we are able to interact with smart contracts as if they were Javascript objects. It auto converts all calls (from our web application to ethereum blockchain) into low level ABI calls over RPC.
