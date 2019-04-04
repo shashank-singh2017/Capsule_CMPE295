@@ -16,27 +16,32 @@ class Signup extends Component {
 
                     <div class="form-group">
                         <label for="exampleInputEmail1" style={{float: 'left'}}>First Name</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter First Name" />
+                        <input type="text" class="form-control" id="fname" aria-describedby="emailHelp" placeholder="Enter First Name" />
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputPassword1" style={{float: 'left'}}>Last Name</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Last Name" />
+                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" />
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1" style={{float: 'left'}}>Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputPassword1" style={{float: 'left'}}>Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                        <input type="password" class="form-control" id="pwd" placeholder="Password" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" style={{float: 'left'}}>Ether Address</label>
+                        <input type="password" class="form-control" id="eth_add" placeholder="Ether Address" />
                     </div>
 
                     <div class="form-group">
                         <label for="exampleSelect1" style={{float: 'left'}}>Select User Type</label>
-                        <select class="form-control" id="exampleSelect1">
+                        <select class="form-control" id="userType">
                         <option>General User</option>
                         <option>Manufacturer</option>
                         <option>Retailer</option>
