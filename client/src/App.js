@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Route } from 'react-router-dom';
+// import { renderRoutes } from 'react-router-config';
 import {BrowserRouter} from 'react-router-dom';
-import Routing from './components/Routing';
+import './App.scss';
+
+import MainPage from './views/Mainpage';
+import Signup from './views/Signup';
+import DefaultLayout from './containers/DefaultLayout';
 
 class App extends Component {
+
   render() {
     return (
-      <div className="App">
-          <BrowserRouter>
-              <Routing />
-          </BrowserRouter>
-      </div>
+        <BrowserRouter>
+            <div>
+                <Route path="/Home" render={props => <MainPage />} />
+                <Route path="/Signup" render={props => <Signup />} />
+                <Route path="/" render={props => <DefaultLayout {...props}/>} />
+            </div>
+        </BrowserRouter>
+
     );
   }
 }
