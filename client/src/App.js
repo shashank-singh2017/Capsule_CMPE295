@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
 import {BrowserRouter} from 'react-router-dom';
 import './App.scss';
 
 import MainPage from './views/Mainpage';
 import Signup from './views/Signup';
-import DefaultLayout from './containers/DefaultLayout';
+import Login from './views/Login';
+import Dashboard from './views/Dashboard';
 
 class App extends Component {
 
@@ -14,14 +14,15 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div>
+                <Route path="/" exact="true" render={props => <MainPage />} />
+                <Route path="/signup" exact={true} render={props => <Signup />} />
+                <Route path="/login" render={props => <Login />} />
                 <Route path="/Home" render={props => <MainPage />} />
-                <Route path="/Signup" render={props => <Signup />} />
-                <Route path="/" render={props => <DefaultLayout {...props}/>} />
+                <Route path="/AdminDashboard" render={props => <Dashboard />} />
             </div>
         </BrowserRouter>
 
     );
   }
 }
-
 export default App;

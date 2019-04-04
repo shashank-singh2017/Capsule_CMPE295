@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table} from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table, Container} from 'reactstrap';
+import Header from "../Header";
+import ModalComponent from '../ModalComponent/ModalComponent';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -11,6 +13,8 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       radioSelected: 2,
+      isModalOpen: false,
+      modalBody: ''
     };
   }
 
@@ -26,12 +30,30 @@ class Dashboard extends Component {
     });
   }
 
+  openModal = (modal_data) => {
+      this.setState({
+          modalBody: modal_data,
+          isModalOpen: true
+      });
+  }
+
+  closeModal = () => {
+      this.setState({
+          isModalOpen: false
+      });
+  }
+
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   render() {
 
     return (
       <div className="animated fadeIn">
+        <Header />
+        <Container>
+        <br />
+        <br />
+        <ModalComponent isOpen={this.state.isModalOpen} closeModal={this.closeModal} modalBody={this.state.modalBody}/>
         <Row>
           <Col xs="12" sm="6" lg="4">
             <Card className="text-white bg-info" style={{height: '100%', textAlign: 'center'}}>
@@ -82,19 +104,25 @@ class Dashboard extends Component {
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
+                      <tr onClick={() => {
+                          this.openModal("hello1");
+                      }}>
                         <td>03xbdahjfkavhbjnshvksbdzs</td>
                         <td>Samppa Nori</td>
                         <td>2012/01/01</td>
                         <td>Member</td>
                       </tr>
-                      <tr>
+                      <tr onClick={() => {
+                          this.openModal("hello2");
+                      }}>
                         <td>03xbdahjfkavhbjnshvksbdzs</td>
                         <td>Estavan Lykos</td>
                         <td>2012/02/01</td>
                         <td>Staff</td>
                       </tr>
-                      <tr>
+                      <tr onClick={() => {
+                          this.openModal("hello3");
+                      }}>
                         <td>03xbdahjfkavhbjnshvksbdzs</td>
                         <td>Chetan Mohamed</td>
                         <td>2012/02/01</td>
@@ -111,13 +139,14 @@ class Dashboard extends Component {
                         <td>Friderik Dávid</td>
                         <td>2012/01/21</td>
                         <td>Staff</td>
-                      </tr>                 
+                      </tr>
                       </tbody>
                     </Table>
                   </CardBody>
                 </Card>
               </Col>
         </Row>
+        </Container>
       </div>
     );
   }
