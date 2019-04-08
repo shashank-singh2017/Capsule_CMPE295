@@ -3,9 +3,11 @@ const Web3 = require("web3");
 const { interface, bytecode } = require("./compile");
 
 const provider = new HDWalletProvider(
-  "fun glow gym favorite ability device joy replace garage amateur either under",
+  "apology laugh blame illness weapon glory evidence stable still next process web",
   "https://rinkeby.infura.io/v3/4797c4ada5234ee8ab8d76929d30973b"
 );
+
+console.log(provider);
 
 const web3 = new Web3(provider);
 
