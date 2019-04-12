@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../stylesheets/login-signup.css";
 import web3 from "../web3";
-import Header from "./Header";
 import capsuleUser from "../capsuleUser";
 
 
@@ -68,7 +67,6 @@ class Signup extends Component {
         className="container-fluid"
         style={{ height: "100%", paddingBottom: "2%" }}
       >
-        <Header />
 
         <div className="row box-login" style={{ paddingTop: "2%" }}>
           <h1>Signup</h1>

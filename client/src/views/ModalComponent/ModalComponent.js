@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Col, Row, Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'reactstrap';
 
 class ModalComponent extends Component {
   render() {
