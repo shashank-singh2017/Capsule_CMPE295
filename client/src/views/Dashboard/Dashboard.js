@@ -8,6 +8,7 @@ import CreateBatchForm from '../Forms/CreateBatchForm';
 import Signup from '../Signup';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import ProgressModal from '../ModalComponent/ProgressModal';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -24,7 +25,9 @@ class Dashboard extends Component {
       isBatchModalOpen: false,
       batchModalBody: '',
       isCreateUserOpen: false,
-      createUserModalBody: ''
+      createUserModalBody: '',
+      isProgressModalOpen: false,
+      progressModalBody: ''
     };
   }
 
@@ -79,6 +82,22 @@ class Dashboard extends Component {
       });
   }
 
+  openProgressModal = () => {
+
+      console.log("inside openProgressModal");
+
+      this.setState({
+         progressModalBody: ["123", "234", "345", "567"],
+         isProgressModalOpen: true
+      });
+  }
+
+  closeProgressModal = () => {
+      this.setState({
+          isProgressModalOpen: false
+      })
+  }
+
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   render() {
@@ -129,9 +148,11 @@ class Dashboard extends Component {
                 <Col xs="10" sm="10" lg="10">
                     <Container>
                     <br />
+                    <ProgressModal isProgressModalOpen={this.state.isProgressModalOpen} progressModalBody={this.state.progressModalBody} closeProgressModal={this.closeProgressModal}/>
                     <CreateUserModal isCreateUserOpen={this.state.isCreateUserOpen} closeCreateUserModal={this.closeCreateUserModal} createUserModalBody={this.state.createUserModalBody}/>
                     <CreateBatchModal isBatchModalOpen={this.state.isBatchModalOpen} closeBatchModal={this.closeBatchModal} batchModalBody={this.state.batchModalBody}/>
                     <ModalComponent isOpen={this.state.isModalOpen} closeModal={this.closeModal} modalBody={this.state.modalBody}/>
+
                     <Row>
                       <Col xs="12" sm="6" lg="4">
                         <Card className="text-white bg-info" style={{height: '100%', textAlign: 'center'}}>
@@ -183,7 +204,7 @@ class Dashboard extends Component {
                                   </thead>
                                   <tbody>
                                   <tr onClick={() => {
-                                      this.openModal("hello1");
+                                      this.openProgressModal();
                                   }}>
                                     <td>02xbdahjfkavhbjnshvksbd</td>
                                     <td>Abc Pharma</td>

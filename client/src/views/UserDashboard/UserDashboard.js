@@ -4,6 +4,7 @@ import Header from "../Header";
 import ModalComponent from '../ModalComponent/ModalComponent';
 import CreateBatchModal from '../ModalComponent/CreateBatchModal';
 import CreateUserModal from '../ModalComponent/CreateUserModal';
+import ProgressModal from '../ModalComponent/ProgressModal';
 import CreateBatchForm from '../Forms/CreateBatchForm';
 import Signup from '../Signup';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
@@ -17,10 +18,7 @@ class UserDashboard extends Component {
     this.state = {
     };
   }
-
-
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
   render() {
 
     return (
@@ -63,7 +61,7 @@ class UserDashboard extends Component {
                           </thead>
                           <tbody>
                           <tr onClick={() => {
-                              this.openModal("hello1");
+                              this.openModal("");
                           }}>
                             <td>02xbdahjfkavhbjnshvksbd</td>
                             <td>Abc Pharma</td>
@@ -80,7 +78,6 @@ class UserDashboard extends Component {
                               <td>Ameri medi ltd.</td>
                               <td>Sandy Joe</td>
                           </tr>
-
                           </tbody>
                         </Table>
                       </CardBody>
@@ -119,7 +116,6 @@ class UserDashboard extends Component {
             </Col>
           </Row>
         </Tab.Container>
-
       </div>
     );
   }

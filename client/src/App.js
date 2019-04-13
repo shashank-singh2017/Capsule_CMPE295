@@ -8,6 +8,7 @@ import Signup from './views/Signup';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
 import UserDashboard from './views/UserDashboard/UserDashboard';
+import ProgressData from './views/Progress/ProgressData';
 
 class App extends Component {
 
@@ -21,6 +22,7 @@ class App extends Component {
                 <Route path="/Home" render={props => <MainPage />} />
                 <Route path="/AdminDashboard" render={props => <Dashboard />} />
                 <Route path="/UserDashboard" render={props => <UserDashboard />} />
+                <Route path="/ProgressData" render={props => <ProgressData/>} />
             </div>
         </BrowserRouter>
 
