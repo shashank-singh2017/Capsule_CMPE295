@@ -19,31 +19,14 @@ class Signup extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-
     let accounts = await web3.eth.getAccounts();
-
-    // web3.eth.getAccounts(function(error, account) {
-    //   console.log(accounts);
-    //   accounts = account;
-    // })
-
-    console.log(accounts);
 
     this.setState({
       message: "Waiting on transaction success...",
       value: "0.01"
     });
 
-    console.log(this.state.address);
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log(this.state.userType);
-
     await capsuleUser.methods
-
-
       .setUser(
         this.state.address,
         this.state.firstName,
@@ -52,7 +35,6 @@ class Signup extends Component {
         this.state.password,
         this.state.userType
       )
-
       .send({
         from: accounts[0],
         value: web3.utils.toWei('0.1', "ether")

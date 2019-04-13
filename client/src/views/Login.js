@@ -20,7 +20,6 @@ class Login extends Component {
   };
 
   async componentDidMount() {
-    // const manager = await lottery.methods.manager().call();
     const {
       firstName,
       lastName,
@@ -44,11 +43,7 @@ class Login extends Component {
       value: "0.01"
     });
 
-    console.log(this.state.address);
-
     const user = await capsuleUser.methods.getUser(this.state.address).call();
-
-    console.log(user);
 
     this.setState({
       firstName: user[0],

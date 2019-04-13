@@ -94,7 +94,7 @@ class Dashboard extends Component {
                     }} style={{backgroundColor: 'black'}}>
                     <SideNav.Toggle />
                     <SideNav.Nav defaultSelected="home">
-                        <NavItem eventKey="home">
+                        <NavItem eventKey="home" style={{display: 'inline'}}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
@@ -176,6 +176,7 @@ class Dashboard extends Component {
                                   <tr>
                                     <th>Batch Id</th>
                                     <th>Manufacturer</th>
+                                    <th>Logistics</th>
                                     <th>Retailer</th>
                                     <th>End user</th>
                                   </tr>
@@ -184,38 +185,36 @@ class Dashboard extends Component {
                                   <tr onClick={() => {
                                       this.openModal("hello1");
                                   }}>
-                                    <td>03xbdahjfkavhbjnshvksbdzs</td>
-                                    <td>Samppa Nori</td>
-                                    <td>2012/01/01</td>
-                                    <td>Member</td>
+                                    <td>02xbdahjfkavhbjnshvksbd</td>
+                                    <td>Abc Pharma</td>
+                                    <td>One logisics</td>
+                                    <td>Star medicines</td>
+                                    <td>Hilberto Rodriguez</td>
                                   </tr>
                                   <tr onClick={() => {
                                       this.openModal("hello2");
                                   }}>
-                                    <td>03xbdahjfkavhbjnshvksbdzs</td>
-                                    <td>Estavan Lykos</td>
-                                    <td>2012/02/01</td>
-                                    <td>Staff</td>
+                                      <td>01gfhgdhgdhdfhfdhvksku</td>
+                                      <td>Bio Labs</td>
+                                      <td>logi one</td>
+                                      <td>Ameri medi ltd.</td>
+                                      <td>Sandy Joe</td>
                                   </tr>
                                   <tr onClick={() => {
                                       this.openModal("hello3");
                                   }}>
-                                    <td>03xbdahjfkavhbjnshvksbdzs</td>
-                                    <td>Chetan Mohamed</td>
-                                    <td>2012/02/01</td>
-                                    <td>Admin</td>
+                                      <td>05xbdahkjiescnnshvksbde</td>
+                                      <td>Tri pharma</td>
+                                      <td>Moon shippers</td>
+                                      <td>Bell medicos</td>
+                                      <td>Amber Jr</td>
                                   </tr>
                                   <tr>
-                                    <td>03xbdahjfkavhbjnshvksbdzs</td>
-                                    <td>Derick Maximinus</td>
-                                    <td>2012/03/01</td>
-                                    <td>Member</td>
-                                  </tr>
-                                  <tr>
-                                    <td>03xbdahjfkavhbjnshvksbdzs</td>
-                                    <td>Friderik Dávid</td>
-                                    <td>2012/01/21</td>
-                                    <td>Staff</td>
+                                      <td>08xbdahjgnhfjfgshvksjhftf</td>
+                                      <td>Unique ltd.</td>
+                                      <td>One logisics</td>
+                                      <td>Vineet drugs</td>
+                                      <td>Shashank Singh</td>
                                   </tr>
                                   </tbody>
                                 </Table>

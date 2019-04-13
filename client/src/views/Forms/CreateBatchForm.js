@@ -15,13 +15,9 @@ class CreateBatchForm extends Component {
             </label>
             <input
               type="text"
-              // name={this.state.address}
               class="form-control"
               id="eth_add"
               placeholder="Product Details"
-              // onChange={event =>
-              //   this.setState({ address: event.target.value })
-              // }
             />
           </div>
 
@@ -30,15 +26,11 @@ class CreateBatchForm extends Component {
                  Manufacturer
               </label>
               <input
-                // name={this.state.firstName}
                 type="text"
                 class="form-control"
                 id="fname"
                 aria-describedby="emailHelp"
                 placeholder="Enter Manufacturer"
-                // onChange={event =>
-                //   this.setState({ firstName: event.target.value })
-                // }
               />
             </div>
 
