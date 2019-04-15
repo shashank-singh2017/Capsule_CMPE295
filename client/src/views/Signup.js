@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../stylesheets/login-signup.css";
 import web3 from "../web3";
-import Header from "./Header";
 import capsuleUser from "../capsuleUser";
 
 class Signup extends Component {
@@ -19,20 +18,12 @@ class Signup extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-
-    const accounts = await web3.eth.getAccounts();
+    let accounts = await web3.eth.getAccounts();
 
     this.setState({
       message: "Waiting on transaction success...",
       value: "0.01"
     });
-
-    console.log(this.state.address);
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log(this.state.userType);
 
     await capsuleUser.methods
       .setUser(
@@ -45,7 +36,7 @@ class Signup extends Component {
       )
       .send({
         from: accounts[0],
-        value: web3.utils.toWei(this.state.value, "ether")
+        value: web3.utils.toWei("0.1", "ether")
       });
 
     this.setState({ message: "You have been entered!" });
@@ -57,8 +48,6 @@ class Signup extends Component {
         className="container-fluid"
         style={{ height: "100%", paddingBottom: "2%" }}
       >
-        <Header />
-
         <div className="row box-login" style={{ paddingTop: "2%" }}>
           <h1>Signup</h1>
 
@@ -66,14 +55,14 @@ class Signup extends Component {
             style={{ width: "100%", marginTop: 20 }}
             onSubmit={this.onSubmit}
           >
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputEmail1" style={{ float: "left" }}>
                 First Name
               </label>
               <input
                 name={this.state.firstName}
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="fname"
                 aria-describedby="emailHelp"
                 placeholder="Enter First Name"
@@ -83,14 +72,14 @@ class Signup extends Component {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1" style={{ float: "left" }}>
                 Last Name
               </label>
               <input
                 name={this.state.lastName}
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="lname"
                 placeholder="Enter Last Name"
                 onChange={event =>
@@ -99,14 +88,14 @@ class Signup extends Component {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputEmail1" style={{ float: "left" }}>
                 Email address
               </label>
               <input
                 name={this.state.email}
                 type="email"
-                class="form-control"
+                className="form-control"
                 id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
@@ -114,14 +103,14 @@ class Signup extends Component {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1" style={{ float: "left" }}>
                 Password
               </label>
               <input
                 name={this.state.password}
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="pwd"
                 placeholder="Password"
                 onChange={event =>
@@ -130,14 +119,14 @@ class Signup extends Component {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleInputPassword1" style={{ float: "left" }}>
                 Ether Address
               </label>
               <input
                 name={this.state.address}
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="eth_add"
                 placeholder="Ether Address"
                 onChange={event =>
@@ -146,13 +135,13 @@ class Signup extends Component {
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleSelect1" style={{ float: "left" }}>
                 Select User Type
               </label>
               <select
                 name={this.state.userType}
-                class="form-control"
+                className="form-control"
                 id="userType"
                 placeholder="User Type"
                 onChange={event =>
@@ -166,7 +155,7 @@ class Signup extends Component {
               </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>

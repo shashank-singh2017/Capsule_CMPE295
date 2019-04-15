@@ -47,16 +47,4 @@ contract UserDetails {
         return (tmpData.name);
     }
     
-    
-    
-    // string public message;
-    
-    // function Inbox(string initialMessage) public {
-    //     message = initialMessage;
-    // }
-    
-    // function setMessage(string newMessage) public {
-    //     message = newMessage;
-    // }
-    
 }

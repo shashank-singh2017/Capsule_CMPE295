@@ -3,6 +3,7 @@ pragma solidity ^0.4.17;
 contract CapsuleUser {
     
     struct user {
+        // address userAddress;
         string firstName;
         string lastName;
         string email;
@@ -10,7 +11,12 @@ contract CapsuleUser {
         string userType;
     }
     
-    mapping(address => user) userDetails;
+    mapping(address => user) public userDetails;
+    mapping(address => string) userRole;
+    
+    address[] userAddresses;
+    
+    user[] allUsers;
     
     user userDetail;
     
@@ -20,13 +26,13 @@ contract CapsuleUser {
                      string _email,
                      string _password,
                      string _userType) public payable {
-        
         userDetail.firstName = _firstName;
         userDetail.lastName = _lastName;
         userDetail.email = _email;
         userDetail.password = _password;
         userDetail.userType = _userType;
-        
+        userAddresses.push(_userAddress);
+        allUsers.push(userDetail);
         userDetails[_userAddress] = userDetail;
         
     }
@@ -38,6 +44,10 @@ contract CapsuleUser {
         
         return (tmpData.firstName, tmpData.lastName, tmpData.email, tmpData.password, tmpData.userType);
     }
+
+    function getUserRole(address _userAddress) public view returns(string) {
+        return userRole[_userAddress];
+    }
     
     function getFirstName(address _userAddress) public view returns(string) {
 
@@ -45,6 +55,14 @@ contract CapsuleUser {
         user memory tmpData = userDetails[_userAddress];
         
         return (tmpData.firstName);
+    }
+    
+    function getNoOfUsers() public view returns(uint) {
+        return allUsers.length;
+    }
+    
+    function listOfAddress() public view returns(address[]) {
+        return userAddresses;
     }
     
 }

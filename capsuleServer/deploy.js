@@ -7,6 +7,7 @@ const provider = new HDWalletProvider(
   "https://rinkeby.infura.io/v3/4797c4ada5234ee8ab8d76929d30973b"
 );
 
+console.log(provider);
 const web3 = new Web3(provider);
 
 const deploy = async () => {
