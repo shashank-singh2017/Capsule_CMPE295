@@ -8,7 +8,6 @@ class Signup extends Component {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     userType: "",
     balance: "",
     value: "",
@@ -31,7 +30,6 @@ class Signup extends Component {
         this.state.firstName,
         this.state.lastName,
         this.state.email,
-        this.state.password,
         this.state.userType
       )
       .send({
@@ -48,8 +46,8 @@ class Signup extends Component {
         className="container-fluid"
         style={{ height: "100%", paddingBottom: "2%" }}
       >
-        <div className="row box-login" style={{ paddingTop: "2%" }}>
-          <h1>Signup</h1>
+        <div style={{ paddingTop: "2%" }}>
+          <h3>New User Registration</h3>
 
           <form
             style={{ width: "100%", marginTop: 20 }}
@@ -105,22 +103,6 @@ class Signup extends Component {
 
             <div className="form-group">
               <label for="exampleInputPassword1" style={{ float: "left" }}>
-                Password
-              </label>
-              <input
-                name={this.state.password}
-                type="password"
-                className="form-control"
-                id="pwd"
-                placeholder="Password"
-                onChange={event =>
-                  this.setState({ password: event.target.value })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label for="exampleInputPassword1" style={{ float: "left" }}>
                 Ether Address
               </label>
               <input
@@ -149,9 +131,10 @@ class Signup extends Component {
                 }
               >
                 <option />
-                <option>General User</option>
                 <option>Manufacturer</option>
+                <option>Logistics</option>
                 <option>Retailer</option>
+                <option>End User</option>
               </select>
             </div>
 

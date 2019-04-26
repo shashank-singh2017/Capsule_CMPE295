@@ -7,7 +7,6 @@ contract CapsuleUser {
         string firstName;
         string lastName;
         string email;
-        string password;
         string userType;
     }
     
@@ -24,12 +23,10 @@ contract CapsuleUser {
                      string _firstName,
                      string _lastName, 
                      string _email,
-                     string _password,
                      string _userType) public payable {
         userDetail.firstName = _firstName;
         userDetail.lastName = _lastName;
         userDetail.email = _email;
-        userDetail.password = _password;
         userDetail.userType = _userType;
         userAddresses.push(_userAddress);
         allUsers.push(userDetail);
@@ -37,12 +34,12 @@ contract CapsuleUser {
         
     }
     
-    function getUser(address _userAddress) public view returns(string, string, string, string, string) {
+    function getUser(address _userAddress) public view returns(string, string, string, string) {
 
         /*Getting value from struct*/
         user memory tmpData = userDetails[_userAddress];
         
-        return (tmpData.firstName, tmpData.lastName, tmpData.email, tmpData.password, tmpData.userType);
+        return (tmpData.firstName, tmpData.lastName, tmpData.email, tmpData.userType);
     }
 
     function getUserRole(address _userAddress) public view returns(string) {

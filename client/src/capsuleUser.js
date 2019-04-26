@@ -1,8 +1,17 @@
 import web3 from "./web3";
 
-const address = "0x87288715a8960F4e0Fc7E3234C839dbE4c7a5483";
+const address = "0x2178beAbace17420630f46cBEAeee759Ec0164D9";
 
 const abi = [
+  {
+    constant: true,
+    inputs: [{ name: "_userAddress", type: "address" }],
+    name: "getUserRole",
+    outputs: [{ name: "", type: "string" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
   {
     constant: true,
     inputs: [],
@@ -20,7 +29,6 @@ const abi = [
       { name: "firstName", type: "string" },
       { name: "lastName", type: "string" },
       { name: "email", type: "string" },
-      { name: "password", type: "string" },
       { name: "userType", type: "string" }
     ],
     payable: false,
@@ -44,7 +52,6 @@ const abi = [
       { name: "", type: "string" },
       { name: "", type: "string" },
       { name: "", type: "string" },
-      { name: "", type: "string" },
       { name: "", type: "string" }
     ],
     payable: false,
@@ -58,7 +65,6 @@ const abi = [
       { name: "_firstName", type: "string" },
       { name: "_lastName", type: "string" },
       { name: "_email", type: "string" },
-      { name: "_password", type: "string" },
       { name: "_userType", type: "string" }
     ],
     name: "setUser",

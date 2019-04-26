@@ -213,11 +213,23 @@ class Dashboard extends Component {
     console.log("cur_actor: ", user_index);
 
     if (user_index === 0) {
-      return <Badge color="warning">In Process</Badge>;
+      return (
+        <h5>
+          <Badge color="warning">In Process</Badge>
+        </h5>
+      );
     } else if (user_index > 0 && user_index <= 4) {
-      return <Badge color="success">Completed</Badge>;
+      return (
+        <h5>
+          <Badge color="success">Completed</Badge>
+        </h5>
+      );
     } else if (user_index > 4) {
-      return <Badge>Not Available</Badge>;
+      return (
+        <h5>
+          <Badge>Not Available</Badge>
+        </h5>
+      );
     }
   };
 
@@ -225,11 +237,23 @@ class Dashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 1) {
-      return <Badge color="warning">In Process</Badge>;
+      return (
+        <h5>
+          <Badge color="warning">In Process</Badge>
+        </h5>
+      );
     } else if (user_index > 1) {
-      return <Badge color="success">Completed</Badge>;
+      return (
+        <h5>
+          ><Badge color="success">Completed</Badge>
+        </h5>
+      );
     } else {
-      return <Badge>Not Available</Badge>;
+      return (
+        <h5>
+          <Badge>Not Available</Badge>
+        </h5>
+      );
     }
   };
 
@@ -237,11 +261,23 @@ class Dashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 2) {
-      return <Badge color="warning">In Process</Badge>;
+      return (
+        <h5>
+          <Badge color="warning">In Process</Badge>
+        </h5>
+      );
     } else if (user_index > 2) {
-      return <Badge color="success">Completed</Badge>;
+      return (
+        <h5>
+          <Badge color="success">Completed</Badge>
+        </h5>
+      );
     } else {
-      return <Badge>NotAvailable</Badge>;
+      return (
+        <h5>
+          <Badge>Not Available</Badge>
+        </h5>
+      );
     }
   };
 
@@ -249,11 +285,23 @@ class Dashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 3) {
-      return <Badge color="warning">In Process</Badge>;
+      return (
+        <h5>
+          <Badge color="warning">In Process</Badge>
+        </h5>
+      );
     } else if (user_index > 3) {
-      return <Badge color="success">Completed</Badge>;
+      return (
+        <h5>
+          <Badge color="success">Completed</Badge>
+        </h5>
+      );
     } else {
-      return <Badge>NotAvailable</Badge>;
+      return (
+        <h5>
+          <Badge>Not Available</Badge>
+        </h5>
+      );
     }
   };
 
@@ -270,8 +318,11 @@ class Dashboard extends Component {
                   <NavItem eventKey="home" style={{ display: "inline" }}>
                     <NavIcon>
                       <i
-                        className="fa fa-fw fa-home"
-                        style={{ fontSize: "1.75em" }}
+                        className="fa fa-fw fa-plus"
+                        style={{ fontSize: "1.5em" }}
+                        onClick={() => {
+                          this.openBatchModal();
+                        }}
                       />
                     </NavIcon>
                     <NavText
@@ -285,8 +336,8 @@ class Dashboard extends Component {
                   <NavItem eventKey="home">
                     <NavIcon>
                       <i
-                        className="fa fa-fw fa-user"
-                        style={{ fontSize: "1.75em" }}
+                        className="fa fa-fw fa-address-card"
+                        style={{ fontSize: "1.5em" }}
                       />
                     </NavIcon>
                     <NavText>Users Details</NavText>
@@ -294,8 +345,11 @@ class Dashboard extends Component {
                   <NavItem eventKey="home">
                     <NavIcon>
                       <i
-                        className="fa fa-fw fa-plus"
-                        style={{ fontSize: "1.75em" }}
+                        className="fa fa-fw fa-user"
+                        style={{ fontSize: "1.5em" }}
+                        onClick={() => {
+                          this.openCreateUserModal();
+                        }}
                       />
                     </NavIcon>
                     <NavText

@@ -9,7 +9,9 @@ class CreateBatchModal extends Component {
           isOpen={this.props.isBatchModalOpen}
           className={this.props.className}
         >
-          <ModalHeader>Create Batch</ModalHeader>
+          <ModalHeader>
+            <h1>Create Batch</h1>
+          </ModalHeader>
           <ModalBody>{this.props.batchModalBody}</ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.props.closeBatchModal}>

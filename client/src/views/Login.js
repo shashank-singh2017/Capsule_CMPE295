@@ -11,7 +11,6 @@ class Login extends Component {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     userType: "",
     balance: "",
     value: "",
@@ -24,11 +23,10 @@ class Login extends Component {
       firstName,
       lastName,
       email,
-      password,
       userType
     } = await capsuleUser.methods.getUser(myAccount).call();
 
-    this.setState({ firstName, lastName, email, password, userType });
+    this.setState({ firstName, lastName, email, userType });
   }
 
   onSubmit = async event => {
@@ -48,15 +46,14 @@ class Login extends Component {
     localStorage.setItem("cur_fname", user[0]);
     localStorage.setItem("cur_lname", user[1]);
     localStorage.setItem("cur_email", user[2]);
-    localStorage.setItem("cur_type", user[4]);
+    localStorage.setItem("cur_type", user[3]);
     localStorage.setItem("cur_address", this.state.address);
 
     this.setState({
       firstName: user[0],
       lastName: user[1],
       email: user[2],
-      password: user[3],
-      userType: user[4],
+      userType: user[3],
       message: "You have succefully logged in!"
     });
   };

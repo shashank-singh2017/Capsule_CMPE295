@@ -8,9 +8,11 @@ class CreateUserModal extends Component {
         <Modal
           isOpen={this.props.isCreateUserOpen}
           className={this.props.className}
-          size="lg"
+          // size="lg"
         >
-          <ModalHeader>Create a User</ModalHeader>
+          <ModalHeader>
+            <h1>Create a User</h1>
+          </ModalHeader>
           <ModalBody>{this.props.createUserModalBody}</ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.props.closeCreateUserModal}>
