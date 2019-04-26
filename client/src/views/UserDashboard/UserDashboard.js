@@ -3,7 +3,9 @@ import { Card, CardBody, CardHeader, Col, Row, Table, Badge } from "reactstrap";
 import Header from "../Header";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { Nav, Tab } from "react-bootstrap";
+import ModalComponent from '../ModalComponent/ModalComponent';
 import storage from "../../storage";
+import VerifyBatchManufacturer from '../Forms/VerifyBatchManufacturer';
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -15,7 +17,9 @@ class UserDashboard extends Component {
       email: localStorage.getItem("cur_email"),
       userType: localStorage.getItem("cur_type"),
       address: localStorage.getItem("cur_address"),
-      batches: []
+      batches: [],
+      verifyModalBody: 'dfhevfhjew',
+      isVerifyModalOpen: false
     };
   }
 
@@ -128,6 +132,12 @@ class UserDashboard extends Component {
     }
   };
 
+  openVerifyModal = (batchData) => {
+      this.setState({
+          isVerifyModalOpen: true
+      })
+  }
+  
   render() {
     return (
       <div className="animated fadeIn">
@@ -136,6 +146,11 @@ class UserDashboard extends Component {
           <h3 style={{ paddingTop: 5 }}>User Dashboard</h3>
         </Row>
         <br />
+        <ModalComponent
+            isOpen={this.state.isVerifyModalOpen}
+            modalBody={<VerifyBatchManufacturer />}
+            closeModal={this.state.closeVerifyModal}
+        />
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col sm={2}>
@@ -172,7 +187,9 @@ class UserDashboard extends Component {
                           {this.state.batches.length > 0
                             ? this.state.batches.map((entry, index) => {
                                 return (
-                                  <tr key={index}>
+                                  <tr key={index} onClick={() => {
+                                      this.openVerifyModal(entry)
+                                  }}>
                                     <td>{entry["batch_id"]}</td>
                                     <td>
                                       {this.getManufacturerStatus(
