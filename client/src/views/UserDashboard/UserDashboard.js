@@ -182,48 +182,67 @@ class UserDashboard extends Component {
 
     let batchData_display_temp = [];
 
-    if(batchData.cur_actor === 'MANUFACTURER') {
-        batchData_display_temp = batchData_display_temp;
+    if (batchData.cur_actor === "MANUFACTURER") {
+      batchData_display_temp = batchData_display_temp;
+    } else if (batchData.cur_actor === "LOGISTICS") {
+      // get maufacturer Data and set to batchData_display_temp
+
+      storage.methods
+        .getManufacturerData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log(data);
+        });
+    } else if (batchData.cur_actor === "RETAILER") {
+      console.log(batchData.cur_actor);
+      // get Manufacturer Data
+      storage.methods
+        .getManufacturerData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log("manufacturer data", data);
+        });
+
+      storage.methods
+        .getLogisticsData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log("logistics data", data);
+
+          let data_log = [];
+          data_log.push(data["0"]);
+          data_log.push(data["1"]);
+          data_log.push(data["2"]);
+          data_log.push(data["3"]);
+          data_log.push(data["4"]);
+          data_log.push(data["5"]);
+          data_log.push(data["6"]);
+
+          batchData_display_temp["log"] = data_log;
+
+          console.log("batch display temp: ", batchData_display_temp);
+        });
+    } else if (batchData.cur_actor === "END USER") {
+      storage.methods
+        .getManufacturerData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log("manufacturer data", data);
+        });
+
+      storage.methods
+        .getLogisticsData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log("logistics data", data);
+        });
+      storage.methods
+        .getRetailerData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log("Retailer data", data);
+        });
     }
-    else if(batchData.cur_actor === 'LOGISTICS') {
-        // get maufacturer Data and set to batchData_display_temp
-        storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
-            console.log(data);
-        })
-    }
-    else if(batchData.cur_actor === 'RETAILER') {
-        // get Manufacturer Data
-        storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
-            console.log("manufacturer data", data);
-        })
-
-        storage.methods.getLogisticsData(batchData.batch_id).call().then(data => {
-            console.log("logistics data", data);
-
-            batchData_display_temp['log'] = data;
-
-
-            console.log("batch display temp: ", batchData_display_temp);
-        })
-    }
-    else if(batchData.cur_actor === 'END USER') {
-        storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
-            console.log("manufacturer data", data);
-        })
-
-        storage.methods.getLogisticsData(batchData.batch_id).call().then(data => {
-            console.log("logistics data", data);
-        })
-        storage.methods.getRetailerData(batchData.batch_id).call().then(data => {
-            console.log("Retailer data", data);
-        })
-    }
-
-
-
-
-
-
 
     this.setState({
       modalBody: <Progress />,
@@ -313,9 +332,7 @@ class UserDashboard extends Component {
                                     </td>
                                     <td
                                       onClick={() => {
-                                        this.openProgressModal(
-                                          entry
-                                        );
+                                        this.openProgressModal(entry);
                                       }}
                                     >
                                       <i
