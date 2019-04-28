@@ -162,7 +162,8 @@ class UserDashboard extends Component {
     } else if (user_type === "Retailer" && batchData.cur_actor === "RETAILER") {
       modal_body = <VerifyBatchRetailer batchId={batchData.batch_id} />;
     } else if (user_type === "End User" && batchData.cur_actor === "ENDUSER") {
-      return <VerifyBatchUser batchId={batchData.batch_id} />;
+      console.log("Inside end user block");
+      modal_body = <VerifyBatchUser batchId={batchData.batch_id} />;
     } else {
       modal_body = "You are not the Current Owner";
     }
@@ -180,7 +181,8 @@ class UserDashboard extends Component {
     // get the batch Details
     console.log("BatchData: ", batchData);
 
-    let batchData_display_temp = [];
+    var batchData_display_temp = [];
+    var batchData_display_done = [];
 
     if (batchData.cur_actor === "MANUFACTURER") {
       batchData_display_temp = batchData_display_temp;
@@ -225,7 +227,7 @@ class UserDashboard extends Component {
         .then(data => {
           console.log("manufacturer data", data);
 
-          let data_man = [];
+          var data_man = [];
 
           data_man.push(data["0"]);
           data_man.push(data["1"]);
@@ -247,7 +249,7 @@ class UserDashboard extends Component {
             .then(data => {
               console.log("logistics data", data);
 
-              let data_log = [];
+              var data_log = [];
               data_log.push(data["0"]);
               data_log.push(data["1"]);
               data_log.push(data["2"]);
@@ -268,53 +270,53 @@ class UserDashboard extends Component {
             });
         });
     } else if (batchData.cur_actor === "ENDUSER") {
+      storage.methods
+        .getManufacturerData(batchData.batch_id)
+        .call()
+        .then(data => {
+          console.log("manufacturer data", data);
 
-        storage.methods
-          .getManufacturerData(batchData.batch_id)
-          .call()
-          .then(data => {
-            console.log("manufacturer data", data);
+          let data_man = [];
 
-            let data_man = [];
+          data_man.push(data["0"]);
+          data_man.push(data["1"]);
+          data_man.push(data["2"]);
+          data_man.push(data["3"]);
+          data_man.push(data["4"]);
+          data_man.push(data["5"]);
+          data_man.push(data["6"]);
 
-            data_man.push(data["0"]);
-            data_man.push(data["1"]);
-            data_man.push(data["2"]);
-            data_man.push(data["3"]);
-            data_man.push(data["4"]);
-            data_man.push(data["5"]);
-            data_man.push(data["6"]);
+          batchData_display_done["man"] = data_man;
+          return batchData_display_done;
+        })
+        .then(batchData_display_done => {
+          console.log("data: ", batchData_display_done);
 
-            batchData_display_temp["man"] = data_man;
-            return batchData_display_temp;
-          })
-          .then(summaryData => {
-            console.log("data: ", summaryData);
+          storage.methods
+            .getLogisticsData(batchData.batch_id)
+            .call()
+            .then(data => {
+              console.log("logistics data", data);
 
-            storage.methods
-              .getLogisticsData(batchData.batch_id)
-              .call()
-              .then(data => {
-                console.log("logistics data", data);
+              let data_log = [];
+              data_log.push(data["0"]);
+              data_log.push(data["1"]);
+              data_log.push(data["2"]);
+              data_log.push(data["3"]);
+              data_log.push(data["4"]);
+              data_log.push(data["5"]);
+              data_log.push(data["6"]);
 
-                let data_log = [];
-                data_log.push(data["0"]);
-                data_log.push(data["1"]);
-                data_log.push(data["2"]);
-                data_log.push(data["3"]);
-                data_log.push(data["4"]);
-                data_log.push(data["5"]);
-                data_log.push(data["6"]);
+              batchData_display_done["log"] = data_log;
 
-                summaryData["log"] = data_log;
+              console.log("Summary Data: ", batchData_display_done);
 
-                console.log("Summary Data: ", summaryData);
+              // var xyz = batchData_display_done;
+              return batchData_display_done;
+            })
+            .then(batchData_display_done => {
+              console.log(batchData_display_done);
 
-                return summaryData;
-
-              });
-          })
-          .then(data_summary => {
               storage.methods
                 .getRetailerData(batchData.batch_id)
                 .call()
@@ -330,16 +332,20 @@ class UserDashboard extends Component {
                   data_ret.push(data["5"]);
                   data_ret.push(data["6"]);
 
-                  data_summary["ret"] = data_ret;
+                  batchData_display_done["ret"] = data_ret;
+
+                  console.log(batchData_display_done);
 
                   this.setState({
                     // batchData_display: summaryData
-                    modalBody: <Progress summaryData={data_summary} />,
+                    modalBody: (
+                      <Progress summaryData={batchData_display_done} />
+                    ),
                     isModalOpen: true
                   });
                 });
-          });
-    
+            });
+        });
     } else if (batchData.cur_actor === "DONE") {
       storage.methods
         .getManufacturerData(batchData.batch_id)
@@ -357,11 +363,11 @@ class UserDashboard extends Component {
           data_man.push(data["5"]);
           data_man.push(data["6"]);
 
-          batchData_display_temp["man"] = data_man;
-          return batchData_display_temp;
+          batchData_display_done["man"] = data_man;
+          return batchData_display_done;
         })
-        .then(summaryData => {
-          console.log("data: ", summaryData);
+        .then(batchData_display_done => {
+          console.log("data: ", batchData_display_done);
 
           storage.methods
             .getLogisticsData(batchData.batch_id)
@@ -378,55 +384,60 @@ class UserDashboard extends Component {
               data_log.push(data["5"]);
               data_log.push(data["6"]);
 
-              summaryData["log"] = data_log;
+              batchData_display_done["log"] = data_log;
 
-              console.log("Summary Data: ", summaryData);
+              console.log("Summary Data: ", batchData_display_done);
 
-              return summaryData;
-            });
-        })
-        .then(summaryData => {
-          storage.methods
-            .getRetailerData(batchData.batch_id)
-            .call()
-            .then(data => {
-              console.log("Retailer data", data);
+              // var xyz = batchData_display_done;
+              return batchData_display_done;
+            })
+            .then(batchData_display_done => {
+              console.log(batchData_display_done);
 
-              let data_ret = [];
-              data_ret.push(data["0"]);
-              data_ret.push(data["1"]);
-              data_ret.push(data["2"]);
-              data_ret.push(data["3"]);
-              data_ret.push(data["4"]);
-              data_ret.push(data["5"]);
-              data_ret.push(data["6"]);
+              storage.methods
+                .getRetailerData(batchData.batch_id)
+                .call()
+                .then(data => {
+                  console.log("Retailer data", data);
 
-              summaryData["ret"] = data_ret;
+                  let data_ret = [];
+                  data_ret.push(data["0"]);
+                  data_ret.push(data["1"]);
+                  data_ret.push(data["2"]);
+                  data_ret.push(data["3"]);
+                  data_ret.push(data["4"]);
+                  data_ret.push(data["5"]);
+                  data_ret.push(data["6"]);
 
-              return summaryData;
-            });
-        })
-        .then(summaryData => {
-          storage.methods
-            .getEndUserData(batchData.batch_id)
-            .call()
-            .then(data => {
-              let data_user = [];
-              data_user.push(data["0"]);
-              data_user.push(data["1"]);
-              data_user.push(data["2"]);
-              data_user.push(data["3"]);
-              data_user.push(data["4"]);
-              data_user.push(data["5"]);
-              data_user.push(data["6"]);
+                  batchData_display_done["ret"] = data_ret;
 
-              summaryData["user"] = data_user;
+                  console.log(batchData_display_done);
 
-              this.setState({
-                // batchData_display: summaryData
-                modalBody: <Progress summaryData={summaryData} />,
-                isModalOpen: true
-              });
+                  return batchData_display_done;
+                })
+                .then(summaryData => {
+                  storage.methods
+                    .getEndUserData(batchData.batch_id)
+                    .call()
+                    .then(data => {
+                      let data_user = [];
+                      data_user.push(data["0"]);
+                      data_user.push(data["1"]);
+                      data_user.push(data["2"]);
+                      data_user.push(data["3"]);
+                      data_user.push(data["4"]);
+                      data_user.push(data["5"]);
+                      data_user.push(data["6"]);
+
+                      summaryData["user"] = data_user;
+
+                      this.setState({
+                        // batchData_display: summaryData
+                        modalBody: <Progress summaryData={summaryData} />,
+                        isModalOpen: true
+                      });
+                    });
+                });
             });
         });
     }
