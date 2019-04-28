@@ -190,7 +190,33 @@ class UserDashboard extends Component {
         storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
             console.log(data);
         })
+    }
+    else if(batchData.cur_actor === 'RETAILER') {
+        // get Manufacturer Data
+        storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
+            console.log("manufacturer data", data);
+        })
 
+        storage.methods.getLogisticsData(batchData.batch_id).call().then(data => {
+            console.log("logistics data", data);
+
+            batchData_display_temp['log'] = data;
+
+
+            console.log("batch display temp: ", batchData_display_temp);
+        })
+    }
+    else if(batchData.cur_actor === 'END USER') {
+        storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
+            console.log("manufacturer data", data);
+        })
+
+        storage.methods.getLogisticsData(batchData.batch_id).call().then(data => {
+            console.log("logistics data", data);
+        })
+        storage.methods.getRetailerData(batchData.batch_id).call().then(data => {
+            console.log("Retailer data", data);
+        })
     }
 
 
