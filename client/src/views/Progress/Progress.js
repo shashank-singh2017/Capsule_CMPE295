@@ -177,7 +177,7 @@ class Progress extends Component {
             <i
               className="fa fa-check-circle fa-3x"
               style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
-          />
+            />
           </Col>
         </Row>
       </Col>
@@ -185,23 +185,38 @@ class Progress extends Component {
   };
 
   getArrowJsx = () => {
-      return (
-          <Col md="12" style={{ textAlign: "center" }}>
-                <i
-                  className="fa fa-arrow-down fa-3x"
-                  style={{ marginTop: 0, marginRight: "5%" }}
-                />
-          </Col>
-      );
-  }
+    return (
+      <Col md="12" style={{ textAlign: "center" }}>
+        <i
+          className="fa fa-arrow-down fa-3x"
+          style={{ marginTop: 0, marginRight: "5%" }}
+        />
+      </Col>
+    );
+  };
 
   getNoDataAvailable = () => {
-      return (
-        <div>
-            Data not Available
-        </div>
-      );
-  }
+    return (
+      <Col xs="12" sm="12" md="12" style={{ marginTop: "3%" }}>
+        <Row>
+          <Col xs="1" sm="1" md="1" />
+          <Col xs="10" sm="10" md="9">
+            <Card className="text-white bg-info" style={{ minHeight: 250 }}>
+              <CardBody style={{ backgroundColor: "gray" }}>
+                No Data Available
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+            <i
+              className="fa fa-check-circle fa-3x"
+              style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
+            />
+          </Col>
+        </Row>
+      </Col>
+    );
+  };
 
   getEndUserJsx = () => {
     return (
@@ -285,20 +300,22 @@ class Progress extends Component {
       return (
         <Row>
           {this.getManufacturerJsx()}
-          this.getArrowJsx()}
+          {this.getArrowJsx()}
           {this.getLogisticsJsx()}
-          this.getArrowJsx()}
+          {this.getArrowJsx()}
           {this.getRetailerJsx()}
           {this.getArrowJsx()}
           {this.getNoDataAvailable()}
-
         </Row>
       );
-  } else if ( this.props.summaryData['log'] !== undefined && this.props.summaryData["log"].length > 0) {
+    } else if (
+      this.props.summaryData["log"] !== undefined &&
+      this.props.summaryData["log"].length > 0
+    ) {
       return (
         <Row>
           {this.getManufacturerJsx()}
-          this.getArrowJsx()}
+          {this.getArrowJsx()}
           {this.getLogisticsJsx()}
           {this.getArrowJsx()}
           {this.getNoDataAvailable()}
@@ -306,16 +323,21 @@ class Progress extends Component {
           {this.getNoDataAvailable()}
         </Row>
       );
-  } else if (this.props.summaryData['man'] !== undefined && this.props.summaryData["man"].length > 0) {
-      return <Row>
-      {this.getManufacturerJsx()}
-      {this.getArrowJsx()}
-      {this.getNoDataAvailable()}
-      {this.getArrowJsx()}
-      {this.getNoDataAvailable()}
-      {this.getArrowJsx()}
-      {this.getNoDataAvailable()}
-      </Row>;
+    } else if (
+      this.props.summaryData["man"] !== undefined &&
+      this.props.summaryData["man"].length > 0
+    ) {
+      return (
+        <Row>
+          {this.getManufacturerJsx()}
+          {this.getArrowJsx()}
+          {this.getNoDataAvailable()}
+          {this.getArrowJsx()}
+          {this.getNoDataAvailable()}
+          {this.getArrowJsx()}
+          {this.getNoDataAvailable()}
+        </Row>
+      );
     }
   }
 }
