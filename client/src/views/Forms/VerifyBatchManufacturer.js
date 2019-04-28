@@ -6,13 +6,13 @@ class VerifyBatchManufacturer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        manufacturerRegNum: '',
-        manufacturerName: '',
-        manufacturerAddress: '',
-        typeOfDrug: '',
-        logisticHandlerName: '',
-        labTestResults: '',
-        productId: ''
+      manufacturerRegNum: "",
+      manufacturerName: "",
+      manufacturerAddress: "",
+      typeOfDrug: "",
+      logisticHandlerName: "",
+      labTestResults: "",
+      productId: ""
     };
   }
 
@@ -20,8 +20,11 @@ class VerifyBatchManufacturer extends Component {
     event.preventDefault();
     let accounts = await web3.eth.getAccounts();
 
+    console.log(this.props.batchId);
+
     await storage.methods
       .setManufacturerData(
+        this.props.batchId,
         this.state.manufacturerRegNum,
         this.state.manufacturerName,
         this.state.manufacturerAddress,
@@ -135,7 +138,7 @@ class VerifyBatchManufacturer extends Component {
 
           <div class="form-group">
             <label for="exampleInputPassword1" style={{ float: "left" }}>
-                Product Id
+              Product Id
             </label>
             <input
               type="text"
@@ -147,7 +150,6 @@ class VerifyBatchManufacturer extends Component {
               }
             />
           </div>
-
 
           <button type="submit" class="btn btn-primary">
             Submit

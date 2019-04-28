@@ -5,8 +5,12 @@ class ModalComponent extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <Modal isOpen={this.props.isOpen} className={this.props.className} size="lg">
-          <ModalHeader>Modal title</ModalHeader>
+        <Modal
+          isOpen={this.props.isOpen}
+          className={this.props.className}
+          size="lg"
+        >
+          <ModalHeader>{this.props.modalTitle}</ModalHeader>
           <ModalBody>{this.props.modalBody}</ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.props.closeModal}>

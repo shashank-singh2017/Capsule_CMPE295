@@ -1,6 +1,6 @@
 import web3 from "./web3";
 
-const address = "0x133463bfA0197A8D1969f7242d3dE6b958B30563";
+const address = "0xf41F95350FE81391D31d5A7dDe9f6bE49744aba9";
 
 const abi = [
   {
@@ -8,10 +8,13 @@ const abi = [
     inputs: [{ name: "", type: "address" }],
     name: "manufacturer",
     outputs: [
-      { name: "drugName", type: "string" },
-      { name: "drugFamily", type: "string" },
+      { name: "manufacturerRegNum", type: "string" },
+      { name: "manufacturerName", type: "string" },
+      { name: "manufacturerAddress", type: "string" },
       { name: "typeOfDrug", type: "string" },
-      { name: "ingredientsUsed", type: "string" }
+      { name: "logisticHandlerName", type: "string" },
+      { name: "labTestResults", type: "string" },
+      { name: "productId", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -45,14 +48,35 @@ const abi = [
     type: "function"
   },
   {
+    constant: false,
+    inputs: [
+      { name: "batchId", type: "address" },
+      { name: "drugName", type: "string" },
+      { name: "quantity", type: "uint256" },
+      { name: "arrivalTime", type: "uint256" },
+      { name: "productId", type: "string" },
+      { name: "productQualityRating", type: "string" },
+      { name: "deliveryMetricsRating", type: "string" },
+      { name: "reviewComments", type: "string" }
+    ],
+    name: "setEndUserData",
+    outputs: [{ name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
     constant: true,
     inputs: [{ name: "batchId", type: "address" }],
     name: "getManufacturerData",
     outputs: [
-      { name: "drugName", type: "string" },
-      { name: "drugFamily", type: "string" },
+      { name: "manufacturerRegNum", type: "string" },
+      { name: "manufacturerName", type: "string" },
+      { name: "manufacturerAddress", type: "string" },
       { name: "typeOfDrug", type: "string" },
-      { name: "ingredientsUsed", type: "string" }
+      { name: "logisticHandlerName", type: "string" },
+      { name: "labTestResults", type: "string" },
+      { name: "productId", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -71,6 +95,24 @@ const abi = [
     ],
     payable: false,
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      { name: "batchId", type: "address" },
+      { name: "manufacturerRegNum", type: "string" },
+      { name: "manufacturerName", type: "string" },
+      { name: "manufacturerAddress", type: "string" },
+      { name: "typeOfDrug", type: "string" },
+      { name: "logisticHandlerName", type: "string" },
+      { name: "labTestResults", type: "string" },
+      { name: "productId", type: "string" }
+    ],
+    name: "setManufacturerData",
+    outputs: [{ name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -97,7 +139,12 @@ const abi = [
     name: "getEndUserData",
     outputs: [
       { name: "drugName", type: "string" },
-      { name: "quantity", type: "uint256" }
+      { name: "quantity", type: "uint256" },
+      { name: "arrivalTime", type: "uint256" },
+      { name: "productId", type: "string" },
+      { name: "productQualityRating", type: "string" },
+      { name: "deliveryMetricsRating", type: "string" },
+      { name: "reviewComments", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -113,32 +160,38 @@ const abi = [
     type: "function"
   },
   {
-    constant: false,
-    inputs: [
-      { name: "batchId", type: "address" },
-      { name: "drugName", type: "string" },
-      { name: "drugFamily", type: "string" },
-      { name: "typeOfDrug", type: "string" },
-      { name: "ingredientsUsed", type: "string" }
-    ],
-    name: "setManufacturerData",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
     constant: true,
     inputs: [{ name: "batchId", type: "address" }],
     name: "getRetailerData",
     outputs: [
-      { name: "arrivalTime", type: "uint256" },
+      { name: "arrivalTime", type: "string" },
       { name: "quantity", type: "uint256" },
       { name: "shipmentNum", type: "string" },
-      { name: "warehouseName", type: "string" }
+      { name: "warehouseName", type: "string" },
+      { name: "damagedItemsRecvd", type: "bool" },
+      { name: "damagedItemsQuantity", type: "uint256" },
+      { name: "productId", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      { name: "batchId", type: "address" },
+      { name: "destinationName", type: "string" },
+      { name: "destinationAddress", type: "string" },
+      { name: "shipmentNum", type: "string" },
+      { name: "quantity", type: "uint256" },
+      { name: "departureTime", type: "string" },
+      { name: "estimatedArrivalTime", type: "string" },
+      { name: "productId", type: "string" }
+    ],
+    name: "setLogisticsData",
+    outputs: [{ name: "", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -147,10 +200,12 @@ const abi = [
     name: "logistics",
     outputs: [
       { name: "destinationName", type: "string" },
+      { name: "destinationAddress", type: "string" },
       { name: "shipmentNum", type: "string" },
       { name: "quantity", type: "uint256" },
-      { name: "departureTime", type: "uint256" },
-      { name: "estimatedArrivalTime", type: "uint256" }
+      { name: "departureTime", type: "string" },
+      { name: "estimatedArrivalTime", type: "string" },
+      { name: "productId", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -181,19 +236,6 @@ const abi = [
     type: "function"
   },
   {
-    constant: false,
-    inputs: [
-      { name: "batchId", type: "address" },
-      { name: "drugName", type: "string" },
-      { name: "quantity", type: "uint256" }
-    ],
-    name: "setEndUserData",
-    outputs: [{ name: "", type: "bool" }],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
     constant: true,
     inputs: [{ name: "", type: "uint256" }],
     name: "userBatchesData",
@@ -216,10 +258,13 @@ const abi = [
     inputs: [{ name: "", type: "address" }],
     name: "retailer",
     outputs: [
-      { name: "arrivalTime", type: "uint256" },
+      { name: "arrivalTime", type: "string" },
       { name: "quantity", type: "uint256" },
       { name: "shipmentNum", type: "string" },
-      { name: "warehouseName", type: "string" }
+      { name: "warehouseName", type: "string" },
+      { name: "damagedItemsRecvd", type: "bool" },
+      { name: "damagedItemsQuantity", type: "uint256" },
+      { name: "productId", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -240,7 +285,12 @@ const abi = [
     name: "endUser",
     outputs: [
       { name: "drugName", type: "string" },
-      { name: "quantity", type: "uint256" }
+      { name: "quantity", type: "uint256" },
+      { name: "arrivalTime", type: "uint256" },
+      { name: "productId", type: "string" },
+      { name: "productQualityRating", type: "string" },
+      { name: "deliveryMetricsRating", type: "string" },
+      { name: "reviewComments", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -250,10 +300,13 @@ const abi = [
     constant: false,
     inputs: [
       { name: "batchId", type: "address" },
-      { name: "arrivalTime", type: "uint256" },
+      { name: "arrivalTime", type: "string" },
       { name: "quantity", type: "uint256" },
       { name: "shipmentNum", type: "string" },
-      { name: "warehouseName", type: "string" }
+      { name: "warehouseName", type: "string" },
+      { name: "damagedItemsRecvd", type: "bool" },
+      { name: "damagedItemsQuantity", type: "uint256" },
+      { name: "productId", type: "string" }
     ],
     name: "setRetailerData",
     outputs: [{ name: "", type: "bool" }],
@@ -263,23 +316,16 @@ const abi = [
   },
   {
     constant: true,
-    inputs: [],
-    name: "getAllBatchIds",
-    outputs: [{ name: "", type: "address[]" }],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
     inputs: [{ name: "batchId", type: "address" }],
     name: "getLogisticsData",
     outputs: [
       { name: "destinationName", type: "string" },
+      { name: "destinationAddress", type: "string" },
       { name: "shipmentNum", type: "string" },
       { name: "quantity", type: "uint256" },
-      { name: "departureTime", type: "uint256" },
-      { name: "estimatedArrivalTime", type: "uint256" }
+      { name: "departureTime", type: "string" },
+      { name: "estimatedArrivalTime", type: "string" },
+      { name: "productId", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -303,19 +349,12 @@ const abi = [
     type: "function"
   },
   {
-    constant: false,
-    inputs: [
-      { name: "batchId", type: "address" },
-      { name: "destinationName", type: "string" },
-      { name: "shipmentNum", type: "string" },
-      { name: "quantity", type: "uint256" },
-      { name: "departureTime", type: "uint256" },
-      { name: "estimatedArrivalTime", type: "uint256" }
-    ],
-    name: "setLogisticsData",
-    outputs: [{ name: "", type: "bool" }],
+    constant: true,
+    inputs: [],
+    name: "getallBatchIds",
+    outputs: [{ name: "", type: "address[]" }],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {

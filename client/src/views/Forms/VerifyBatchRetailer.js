@@ -6,13 +6,13 @@ class VerifyBatchRetailer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        arrivalTime: '',
-        quantity: '',
-        shipmentNum: '',
-        warehouseName: '',
-        damagedItemsRecvd: '',
-        damagedItemsQuantity: '',
-        productId: ''
+      arrivalTime: "",
+      quantity: "",
+      shipmentNum: "",
+      warehouseName: "",
+      damagedItemsRecvd: "",
+      damagedItemsQuantity: "",
+      productId: ""
     };
   }
 
@@ -21,7 +21,8 @@ class VerifyBatchRetailer extends Component {
     let accounts = await web3.eth.getAccounts();
 
     await storage.methods
-      .setManufacturerData(
+      .setRetailerData(
+        this.props.batchId,
         this.state.arrivalTime,
         this.state.quantity,
         this.state.shipmentNum,
@@ -135,7 +136,7 @@ class VerifyBatchRetailer extends Component {
 
           <div class="form-group">
             <label for="exampleInputPassword1" style={{ float: "left" }}>
-                Product Id
+              Product Id
             </label>
             <input
               type="text"
@@ -147,7 +148,6 @@ class VerifyBatchRetailer extends Component {
               }
             />
           </div>
-
 
           <button type="submit" class="btn btn-primary">
             Submit

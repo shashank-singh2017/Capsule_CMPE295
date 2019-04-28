@@ -6,13 +6,13 @@ class VerifyBatchUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        drugName: '',
-        quantity: '',
-        arrivalTime: '',
-        productId: '',
-        productQualityRating: '',
-        deliveryMetricsRating: '',
-        reviewComments: ''
+      drugName: "",
+      quantity: "",
+      arrivalTime: "",
+      productId: "",
+      productQualityRating: "",
+      deliveryMetricsRating: "",
+      reviewComments: ""
     };
   }
 
@@ -21,7 +21,8 @@ class VerifyBatchUser extends Component {
     let accounts = await web3.eth.getAccounts();
 
     await storage.methods
-      .setManufacturerData(
+      .setEndUserData(
+        this.props.batchId,
         this.state.drugName,
         this.state.quantity,
         this.state.arrivalTime,
@@ -136,7 +137,7 @@ class VerifyBatchUser extends Component {
 
           <div class="form-group">
             <label for="exampleInputPassword1" style={{ float: "left" }}>
-                Review Comments
+              Review Comments
             </label>
             <input
               type="text"
@@ -148,7 +149,6 @@ class VerifyBatchUser extends Component {
               }
             />
           </div>
-
 
           <button type="submit" class="btn btn-primary">
             Submit

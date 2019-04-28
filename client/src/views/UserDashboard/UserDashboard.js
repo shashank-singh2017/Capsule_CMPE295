@@ -3,15 +3,14 @@ import { Card, CardBody, CardHeader, Col, Row, Table, Badge } from "reactstrap";
 import Header from "../Header";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { Nav, Tab } from "react-bootstrap";
-import ModalComponent from '../ModalComponent/ModalComponent';
-import VerifyBatchManufacturer from '../Forms/VerifyBatchManufacturer';
-import VerifyBatchUser from '../Forms/VerifyBatchUser';
-import VerifyBatchRetailer from '../Forms/VerifyBatchRetailer';
-import VerifyBatchLogistics from '../Forms/VerifyBatchLogistics';
-import Progress from '../Progress/Progress';
+import ModalComponent from "../ModalComponent/ModalComponent";
+import VerifyBatchManufacturer from "../Forms/VerifyBatchManufacturer";
+import VerifyBatchUser from "../Forms/VerifyBatchUser";
+import VerifyBatchRetailer from "../Forms/VerifyBatchRetailer";
+import VerifyBatchLogistics from "../Forms/VerifyBatchLogistics";
+import Progress from "../Progress/Progress";
 
 import storage from "../../storage";
-
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -24,14 +23,16 @@ class UserDashboard extends Component {
       userType: localStorage.getItem("cur_type"),
       address: localStorage.getItem("cur_address"),
       batches: [],
-      modalBody: 'dfhevfhjew',
-      isModalOpen: false
+      modalBody: "dfhevfhjew",
+      modalTitle: "Modal title",
+      isModalOpen: false,
+      cur_batchId: ""
     };
   }
 
   componentDidMount = () => {
     storage.methods
-      .getUserBatchIds("0xca35b7d915458ef540ade6068dfe2f44e8fa733c")
+      .getUserBatchIds(this.state.address)
       .call()
       .then(batchIds => {
         return batchIds;
@@ -138,48 +139,57 @@ class UserDashboard extends Component {
     }
   };
 
-  openVerifyModal = (batchData) => {
+  openVerifyModal = batchData => {
+    console.log("Batch Data: ", batchData);
 
-      console.log("Batch Data: ", batchData);
+    let user_type = this.state.userType;
+    let modal_body = "";
+    let modal_title = "";
 
-      let user_type = this.state.userType;
+    if (
+      user_type === "Manufacturer" &&
+      batchData.cur_actor === "MANUFACTURER"
+    ) {
+      modal_body = <VerifyBatchManufacturer batchId={batchData.batch_id} />;
+      modal_title = "Verify - Manufacturer";
+    } else if (
+      user_type === "Logistics" &&
+      batchData.cur_actor === "LOGISTICS"
+    ) {
+      modal_body = <VerifyBatchLogistics batchId={batchData.batch_id} />;
+      modal_title = "Verify - Logistics";
+    } else if (user_type === "Retailer" && batchData.cur_actor === "RETAILER") {
+      modal_body = <VerifyBatchRetailer batchId={batchData.batch_id} />;
+    } else if (user_type === "End User" && batchData.cur_actor === "ENDUSER") {
+      return <VerifyBatchUser batchId={batchData.batch_id} />;
+    } else {
+      modal_body = "You are not the Current Owner";
+    }
 
-      if(user_type === 'MANUFACTURER' && batchData.cur_actor === 'MANUFACTURER') {
-          return <VerifyBatchManufacturer />;
-      }
-      else if(user_type === 'LOGISTICS' && batchData.cur_actor === 'LOGISTICS') {
-          return <VerifyBatchLogistics />;
-      }
-      else if(user_type === 'RETAILER' && batchData.cur_actor === 'RETAILER') {
-          return <VerifyBatchRetailer />;
-      }
-      else if(user_type === 'ENDUSER' && batchData.cur_actor === 'ENDUSER') {
-          return <VerifyBatchUser />;
-      }
-      else {
-          return 'You are not the Current Owner';
-      }
+    this.setState({
+      modalBody: modal_body,
+      modalTitle: modal_title,
+      isModalOpen: true
+    });
 
-      this.setState({
-          isModalOpen: true
-      })
-  }
+    console.log("After setting the batchId:", this.state.cur_batchId);
+  };
 
-  openProgressModal = (batchId) => {
-      // get the batch Details
-      console.log("BatchId: ", batchId);
+  openProgressModal = batchId => {
+    // get the batch Details
+    console.log("BatchId: ", batchId);
 
-      this.setState({
-          modalBody: <Progress />,
-          isModalOpen: true
-      })
-  }
+    this.setState({
+      modalBody: <Progress />,
+      isModalOpen: true
+    });
+  };
 
   closeModal = () => {
-      this.setState({
-          isModalOpen: false
-      })
-  }
+    this.setState({
+      isModalOpen: false
+    });
+  };
 
   render() {
     return (
@@ -190,9 +200,10 @@ class UserDashboard extends Component {
         </Row>
         <br />
         <ModalComponent
-            isOpen={this.state.isModalOpen}
-            modalBody={this.state.modalBody}
-            closeModal={this.closeModal}
+          isOpen={this.state.isModalOpen}
+          modalBody={this.state.modalBody}
+          closeModal={this.closeModal}
+          modalTitle={this.state.modalTitle}
         />
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
@@ -231,9 +242,15 @@ class UserDashboard extends Component {
                             ? this.state.batches.map((entry, index) => {
                                 return (
                                   <tr key={index}>
-                                    <td key={index} onClick={() => {
-                                        this.openVerifyModal(entry)
-                                    }}>{entry["batch_id"]}</td>
+                                    <td
+                                      key={index}
+                                      onClick={() => {
+                                        this.openVerifyModal(entry);
+                                      }}
+                                    >
+                                      {entry["batch_id"]}
+                                    </td>
+
                                     <td>
                                       {this.getManufacturerStatus(
                                         entry.cur_actor
@@ -248,9 +265,13 @@ class UserDashboard extends Component {
                                     <td>
                                       {this.getEndUserStatus(entry.cur_actor)}
                                     </td>
-                                    <td onClick={() => {
-                                        this.openProgressModal(entry["batch_id"])
-                                    }}>
+                                    <td
+                                      onClick={() => {
+                                        this.openProgressModal(
+                                          entry["batch_id"]
+                                        );
+                                      }}
+                                    >
                                       <i
                                         className="fa fa-eye fa-md"
                                         style={{ marginTop: 0 }}
