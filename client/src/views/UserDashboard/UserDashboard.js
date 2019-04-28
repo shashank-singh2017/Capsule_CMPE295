@@ -385,14 +385,6 @@ class UserDashboard extends Component {
           batchData_display_temp["user"] = data_user;
         });
     }
-
-    // console.log("summaryData before: ", batchData_display_temp);
-
-    // this.setState({
-    //   isModalOpen: true
-    // });
-
-    // console.log("summaryData after: ");
   };
 
   closeModal = () => {

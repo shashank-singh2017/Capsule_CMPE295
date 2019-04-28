@@ -17,54 +17,54 @@ class Progress extends Component {
     return (
       <Col xs="12" sm="12" md="12">
         <Row>
-          <Col xs="1" sm="1" md="1" />
-          <Col xs="10" sm="10" md="9">
-            <Card className="text-white bg-info" style={{ minHeight: 250 }}>
-              <CardHeader>Manufacturer</CardHeader>
-              <CardBody style={{ backgroundColor: "gray" }}>
-                <Row>
-                  <Col md="4">Product Id</Col>
-                  <Col md="8">{this.props.summaryData["man"][0]}</Col>
-                </Row>
+              <Col xs="1" sm="1" md="1" />
+              <Col xs="10" sm="10" md="9">
+                <Card className="text-white bg-info" style={{ minHeight: 250 }}>
+                  <CardHeader>Manufacturer</CardHeader>
+                  <CardBody style={{ backgroundColor: "gray" }}>
+                    <Row>
+                      <Col md="4">Product Id</Col>
+                      <Col md="8">{this.props.summaryData["man"][0]}</Col>
+                    </Row>
 
-                <Row>
-                  <Col md="4">Manufacturer Reg. No.</Col>
-                  <Col md="8">{this.props.summaryData["man"][1]}</Col>
-                </Row>
+                    <Row>
+                      <Col md="4">Manufacturer Reg. No.</Col>
+                      <Col md="8">{this.props.summaryData["man"][1]}</Col>
+                    </Row>
 
-                <Row>
-                  <Col md="4">Manufacturer Name</Col>
-                  <Col md="8">{this.props.summaryData["man"][2]}</Col>
-                </Row>
+                    <Row>
+                      <Col md="4">Manufacturer Name</Col>
+                      <Col md="8">{this.props.summaryData["man"][2]}</Col>
+                    </Row>
 
-                <Row>
-                  <Col md="4">Manufacturer Address</Col>
-                  <Col md="8">{this.props.summaryData["man"][3]}</Col>
-                </Row>
+                    <Row>
+                      <Col md="4">Manufacturer Address</Col>
+                      <Col md="8">{this.props.summaryData["man"][3]}</Col>
+                    </Row>
 
-                <Row>
-                  <Col md="4">Type Of Drug</Col>
-                  <Col md="8">{this.props.summaryData["man"][4]}</Col>
-                </Row>
+                    <Row>
+                      <Col md="4">Type Of Drug</Col>
+                      <Col md="8">{this.props.summaryData["man"][4]}</Col>
+                    </Row>
 
-                <Row>
-                  <Col md="4">Logistics Handler</Col>
-                  <Col md="8">{this.props.summaryData["man"][5]}</Col>
-                </Row>
+                    <Row>
+                      <Col md="4">Logistics Handler</Col>
+                      <Col md="8">{this.props.summaryData["man"][5]}</Col>
+                    </Row>
 
-                <Row>
-                  <Col md="4">Lab Test Results</Col>
-                  <Col md="8">{this.props.summaryData["man"][6]}</Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
-            <i
-              className="fa fa-check-circle fa-3x"
-              style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
-            />
-          </Col>
+                    <Row>
+                      <Col md="4">Lab Test Results</Col>
+                      <Col md="8">{this.props.summaryData["man"][6]}</Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+                <i
+                  className="fa fa-check-circle fa-3x"
+                  style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
+                />
+              </Col>
         </Row>
       </Col>
     );
@@ -72,12 +72,6 @@ class Progress extends Component {
 
   getLogisticsJsx = () => {
     return (
-      <Col md="12" style={{ textAlign: "center" }}>
-            <i
-              className="fa fa-arrow-down fa-3x"
-              style={{ marginTop: 0, marginRight: "5%" }}
-            />
-          </Col>
 
           <Col xs="12" sm="12" md="12" style={{ marginTop: "3%" }}>
             <Row>
@@ -136,13 +130,7 @@ class Progress extends Component {
 
   getRetailerJsx = () => {
     return(
-      <Col md="12" style={{ textAlign: "center" }}>
-            <i
-              className="fa fa-arrow-down fa-3x"
-              style={{ marginTop: 0, marginRight: "5%" }}
-            />
-          </Col>
-
+        
           <Col xs="12" sm="12" md="12" style={{ marginTop: "3%" }}>
             <Row>
               <Col xs="1" sm="1" md="1" />
@@ -256,9 +244,43 @@ class Progress extends Component {
   };
 
   render() {
-    return (
-      {if()}
-    );
+
+    const summaryData = [];
+
+    if(this.props.summaryData['user'].length > 0) {
+        return (
+          <Row>
+                {this.getManufacturerJsx()}
+                {this.getLogisticsJsx()}
+                {this.getRetailerJsx()}
+                {this.getEndUserJsx()}
+          </Row>
+        );
+    }
+    else if(this.props.summaryData['ret'].length > 0) {
+        return (
+          <Row>
+                {this.getManufacturerJsx()}
+                {this.getLogisticsJsx()}
+                {this.getRetailerJsx()}
+          </Row>
+        );
+    }
+    else if(this.props.summaryData['log'].length > 0) {
+        return (
+          <Row>
+                {this.getManufacturerJsx()}
+                {this.getLogisticsJsx()}
+          </Row>
+        );
+    }
+    else if(this.props.summaryData['man'].length > 0) {
+        return (
+          <Row>
+                {this.getManufacturerJsx()}
+          </Row>
+        );
+    }
   }
 }
 
