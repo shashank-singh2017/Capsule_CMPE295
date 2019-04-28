@@ -39,7 +39,6 @@ class UserDashboard extends Component {
         return batchIds;
       })
       .then(batchIds => {
-        console.log(batchIds);
         let currentBatches = [];
         for (var i = 0; i < batchIds.length; i++) {
           let temp_details = {};
@@ -49,16 +48,12 @@ class UserDashboard extends Component {
             .getNextAction(batchIds[i])
             .call()
             .then(cur_party => {
-              console.log(cur_party);
               temp_details["cur_actor"] = cur_party;
 
               return temp_details;
             })
             .then(data => {
-              console.log(data);
               currentBatches.push(data);
-              console.log(batchIds.length);
-              console.log(currentBatches.length);
 
               if (currentBatches.length === batchIds.length) {
                 this.setState({
@@ -92,8 +87,6 @@ class UserDashboard extends Component {
 
   getManufacturerStatus = user => {
     const user_index = this.getUserIndex(user);
-
-    console.log("cur_actor: ", user_index);
 
     if (user_index === 0) {
       return <Badge color="warning">In Process</Badge>;
@@ -141,8 +134,6 @@ class UserDashboard extends Component {
   };
 
   openVerifyModal = batchData => {
-    console.log("Batch Data: ", batchData);
-
     let user_type = this.state.userType;
     let modal_body = "";
     let modal_title = "";
@@ -162,7 +153,6 @@ class UserDashboard extends Component {
     } else if (user_type === "Retailer" && batchData.cur_actor === "RETAILER") {
       modal_body = <VerifyBatchRetailer batchId={batchData.batch_id} />;
     } else if (user_type === "End User" && batchData.cur_actor === "ENDUSER") {
-      console.log("Inside end user block");
       modal_body = <VerifyBatchUser batchId={batchData.batch_id} />;
     } else {
       modal_body = "You are not the Current Owner";
@@ -173,19 +163,18 @@ class UserDashboard extends Component {
       modalTitle: modal_title,
       isModalOpen: true
     });
-
-    console.log("After setting the batchId:", this.state.cur_batchId);
   };
 
   openProgressModal = batchData => {
-    // get the batch Details
-    console.log("BatchData: ", batchData);
-
     var batchData_display_temp = [];
     var batchData_display_done = [];
 
     if (batchData.cur_actor === "MANUFACTURER") {
-      batchData_display_temp = batchData_display_temp;
+      this.setState({
+        // batchData_display: summaryData
+        modalBody: <Progress summaryData={batchData_display_temp} />,
+        isModalOpen: true
+      });
     } else if (batchData.cur_actor === "LOGISTICS") {
       // get maufacturer Data and set to batchData_display_temp
 
@@ -197,8 +186,6 @@ class UserDashboard extends Component {
             .getManufacturerData(batchData.batch_id)
             .call()
             .then(data => {
-              console.log("manufacturer data", data);
-
               let data_man = [];
 
               data_man.push(data["0"]);
@@ -219,14 +206,11 @@ class UserDashboard extends Component {
             });
         });
     } else if (batchData.cur_actor === "RETAILER") {
-      console.log(batchData.cur_actor);
       // get Manufacturer Data
       storage.methods
         .getManufacturerData(batchData.batch_id)
         .call()
         .then(data => {
-          console.log("manufacturer data", data);
-
           var data_man = [];
 
           data_man.push(data["0"]);
@@ -241,14 +225,10 @@ class UserDashboard extends Component {
           return batchData_display_temp;
         })
         .then(summaryData => {
-          console.log("data: ", summaryData);
-
           storage.methods
             .getLogisticsData(batchData.batch_id)
             .call()
             .then(data => {
-              console.log("logistics data", data);
-
               var data_log = [];
               data_log.push(data["0"]);
               data_log.push(data["1"]);
@@ -259,8 +239,6 @@ class UserDashboard extends Component {
               data_log.push(data["6"]);
 
               summaryData["log"] = data_log;
-
-              console.log("Summary Data: ", summaryData);
 
               this.setState({
                 // batchData_display: summaryData
@@ -274,8 +252,6 @@ class UserDashboard extends Component {
         .getManufacturerData(batchData.batch_id)
         .call()
         .then(data => {
-          console.log("manufacturer data", data);
-
           let data_man = [];
 
           data_man.push(data["0"]);
@@ -290,14 +266,10 @@ class UserDashboard extends Component {
           return batchData_display_done;
         })
         .then(batchData_display_done => {
-          console.log("data: ", batchData_display_done);
-
           storage.methods
             .getLogisticsData(batchData.batch_id)
             .call()
             .then(data => {
-              console.log("logistics data", data);
-
               let data_log = [];
               data_log.push(data["0"]);
               data_log.push(data["1"]);
@@ -309,20 +281,14 @@ class UserDashboard extends Component {
 
               batchData_display_done["log"] = data_log;
 
-              console.log("Summary Data: ", batchData_display_done);
-
               // var xyz = batchData_display_done;
               return batchData_display_done;
             })
             .then(batchData_display_done => {
-              console.log(batchData_display_done);
-
               storage.methods
                 .getRetailerData(batchData.batch_id)
                 .call()
                 .then(data => {
-                  console.log("Retailer data", data);
-
                   let data_ret = [];
                   data_ret.push(data["0"]);
                   data_ret.push(data["1"]);
@@ -333,8 +299,6 @@ class UserDashboard extends Component {
                   data_ret.push(data["6"]);
 
                   batchData_display_done["ret"] = data_ret;
-
-                  console.log(batchData_display_done);
 
                   this.setState({
                     // batchData_display: summaryData
@@ -351,8 +315,6 @@ class UserDashboard extends Component {
         .getManufacturerData(batchData.batch_id)
         .call()
         .then(data => {
-          console.log("manufacturer data", data);
-
           let data_man = [];
 
           data_man.push(data["0"]);
@@ -367,14 +329,10 @@ class UserDashboard extends Component {
           return batchData_display_done;
         })
         .then(batchData_display_done => {
-          console.log("data: ", batchData_display_done);
-
           storage.methods
             .getLogisticsData(batchData.batch_id)
             .call()
             .then(data => {
-              console.log("logistics data", data);
-
               let data_log = [];
               data_log.push(data["0"]);
               data_log.push(data["1"]);
@@ -386,20 +344,14 @@ class UserDashboard extends Component {
 
               batchData_display_done["log"] = data_log;
 
-              console.log("Summary Data: ", batchData_display_done);
-
               // var xyz = batchData_display_done;
               return batchData_display_done;
             })
             .then(batchData_display_done => {
-              console.log(batchData_display_done);
-
               storage.methods
                 .getRetailerData(batchData.batch_id)
                 .call()
                 .then(data => {
-                  console.log("Retailer data", data);
-
                   let data_ret = [];
                   data_ret.push(data["0"]);
                   data_ret.push(data["1"]);
@@ -410,8 +362,6 @@ class UserDashboard extends Component {
                   data_ret.push(data["6"]);
 
                   batchData_display_done["ret"] = data_ret;
-
-                  console.log(batchData_display_done);
 
                   return batchData_display_done;
                 })

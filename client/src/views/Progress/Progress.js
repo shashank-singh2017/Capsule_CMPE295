@@ -6,13 +6,6 @@ class Progress extends Component {
     super(props);
   }
 
-  componentWillMount = () => {
-    console.log(
-      "Inside compDidMt Progress: ",
-      this.props.summaryData["man"][0]
-    );
-  };
-
   getManufacturerJsx = () => {
     return (
       <Col xs="12" sm="12" md="12">
@@ -195,36 +188,36 @@ class Progress extends Component {
     );
   };
 
-  getStatusImg = (data_box) => {
-      if(data_box.length > 0) {
-          return (
-              <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
-                <i
-                  className="fa fa-check-circle fa-3x"
-                  style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
-                />
-              </Col>
-          );
-      }
-      else {
-          return (
-              <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
-                <i
-                  className="fa fa-minus-circle fa-3x"
-                  style={{ marginTop: 0, color: "yellow", marginLeft: "20%" }}
-                />
-              </Col>
-          );
-      }
+  getStatusImg = data_box => {
+    if (data_box.length > 0) {
+      return (
+        <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+          <i
+            className="fa fa-check-circle fa-3x"
+            style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
+          />
+        </Col>
+      );
+    } else {
+      return (
+        <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+          <i
+            className="fa fa-minus-circle fa-3x"
+            style={{ marginTop: 0, color: "yellow", marginLeft: "20%" }}
+          />
+        </Col>
+      );
+    }
   };
 
-  getNoDataAvailable = () => {
+  getNoDataAvailable = card_title => {
     return (
       <Col xs="12" sm="12" md="12" style={{ marginTop: "3%" }}>
         <Row>
           <Col xs="1" sm="1" md="1" />
           <Col xs="10" sm="10" md="9">
             <Card className="text-white bg-info" style={{ minHeight: 250 }}>
+              <CardHeader>{card_title}</CardHeader>
               <CardBody style={{ backgroundColor: "gray" }}>
                 No Data Available
               </CardBody>
@@ -232,8 +225,8 @@ class Progress extends Component {
           </Col>
           <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
             <i
-              className="fa fa-check-circle fa-3x"
-              style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
+              className="fa fa-exclamation-circle fa-3x"
+              style={{ marginTop: 0, color: "orange", marginLeft: "20%" }}
             />
           </Col>
         </Row>
@@ -288,15 +281,18 @@ class Progress extends Component {
             </Card>
           </Col>
 
-          {this.getStatusImg(this.props.summaryData['user'])}
+          <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+            <i
+              className="fa fa-check-circle fa-3x"
+              style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
+            />
+          </Col>
         </Row>
       </Col>
     );
   };
 
   render() {
-    const summaryData = [];
-
     if (
       this.props.summaryData["user"] !== undefined &&
       this.props.summaryData["user"].length > 0
@@ -324,7 +320,7 @@ class Progress extends Component {
           {this.getArrowJsx()}
           {this.getRetailerJsx()}
           {this.getArrowJsx()}
-          {this.getNoDataAvailable()}
+          {this.getNoDataAvailable("End User")}
         </Row>
       );
     } else if (
@@ -337,9 +333,9 @@ class Progress extends Component {
           {this.getArrowJsx()}
           {this.getLogisticsJsx()}
           {this.getArrowJsx()}
-          {this.getNoDataAvailable()}
+          {this.getNoDataAvailable("Retailer")}
           {this.getArrowJsx()}
-          {this.getNoDataAvailable()}
+          {this.getNoDataAvailable("End User")}
         </Row>
       );
     } else if (
@@ -350,11 +346,23 @@ class Progress extends Component {
         <Row>
           {this.getManufacturerJsx()}
           {this.getArrowJsx()}
-          {this.getNoDataAvailable()}
+          {this.getNoDataAvailable("Logistics")}
           {this.getArrowJsx()}
-          {this.getNoDataAvailable()}
+          {this.getNoDataAvailable("Retailer")}
           {this.getArrowJsx()}
-          {this.getNoDataAvailable()}
+          {this.getNoDataAvailable("End User")}
+        </Row>
+      );
+    } else {
+      return (
+        <Row>
+          {this.getNoDataAvailable("Manufacturer")}
+          {this.getArrowJsx()}
+          {this.getNoDataAvailable("Logistics")}
+          {this.getArrowJsx()}
+          {this.getNoDataAvailable("Retailer")}
+          {this.getArrowJsx()}
+          {this.getNoDataAvailable("End User")}
         </Row>
       );
     }
