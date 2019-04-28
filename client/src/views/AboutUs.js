@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 import '../stylesheets/about-us.css';
 
+import { Card, Col, Row, CardBody } from "reactstrap";
+
 class AboutUs extends Component {
   render() {
     return (
       <div className="container-fluid" style={{height: 300, backgroundColor: '#fbf1fb'}}>
-            <div className="row box-aboutus">
+            <div>
+                    <Row style={{height: 300}}>
+                        <Col md="9">
+                            <Card className="text-white bg-info" style={{height: 250}}>
+                                <CardBody style={{backgroundColor: 'gray'}}>
+                                    <h2 style={{textAlign: 'left'}}>
+                                        About Us
+                                    </h2>
+                                    <p style={{textAlign: 'left'}}>
+                                        This is an application which is developed with blockchain.
+                                    </p>
+                                </CardBody>
+                            </Card>
+                        </Col>
 
-                <div className="col-sm-8 leftbox">
-                    <div style={{border: '1px solid',height: '86%', padding: 20,backgroundColor: '#f1eaee'}}>
-                        <h2 style={{textAlign: 'left'}}>
-                            About Us
-                        </h2>
-                        <p style={{textAlign: 'left'}}>
-                            This is an application which is developed with blockchain.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="col-sm-4 rightbox">
-                    <div className="image-box">
-                    </div>
-                </div>
+                        <Col md="3">
+                            <Card className="text-white bg-info" style={{height: 300}}>
+                                <CardBody>
+                                    <div className="image-box">
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
 
             </div>
       </div>

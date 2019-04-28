@@ -4,8 +4,14 @@ import Header from "../Header";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { Nav, Tab } from "react-bootstrap";
 import ModalComponent from '../ModalComponent/ModalComponent';
-import storage from "../../storage";
 import VerifyBatchManufacturer from '../Forms/VerifyBatchManufacturer';
+import VerifyBatchUser from '../Forms/VerifyBatchUser';
+import VerifyBatchRetailer from '../Forms/VerifyBatchRetailer';
+import VerifyBatchLogistics from '../Forms/VerifyBatchLogistics';
+import Progress from '../Progress/Progress';
+
+import storage from "../../storage";
+
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -18,8 +24,8 @@ class UserDashboard extends Component {
       userType: localStorage.getItem("cur_type"),
       address: localStorage.getItem("cur_address"),
       batches: [],
-      verifyModalBody: 'dfhevfhjew',
-      isVerifyModalOpen: false
+      modalBody: 'dfhevfhjew',
+      isModalOpen: false
     };
   }
 
@@ -133,11 +139,48 @@ class UserDashboard extends Component {
   };
 
   openVerifyModal = (batchData) => {
+
+      console.log("Batch Data: ", batchData);
+
+      let user_type = this.state.userType;
+
+      if(user_type === 'MANUFACTURER' && batchData.cur_actor === 'MANUFACTURER') {
+          return <VerifyBatchManufacturer />;
+      }
+      else if(user_type === 'LOGISTICS' && batchData.cur_actor === 'LOGISTICS') {
+          return <VerifyBatchLogistics />;
+      }
+      else if(user_type === 'RETAILER' && batchData.cur_actor === 'RETAILER') {
+          return <VerifyBatchRetailer />;
+      }
+      else if(user_type === 'ENDUSER' && batchData.cur_actor === 'ENDUSER') {
+          return <VerifyBatchUser />;
+      }
+      else {
+          return 'You are not the Current Owner';
+      }
+
       this.setState({
-          isVerifyModalOpen: true
+          isModalOpen: true
       })
   }
-  
+
+  openProgressModal = (batchId) => {
+      // get the batch Details
+      console.log("BatchId: ", batchId);
+
+      this.setState({
+          modalBody: <Progress />,
+          isModalOpen: true
+      })
+  }
+
+  closeModal = () => {
+      this.setState({
+          isModalOpen: false
+      })
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -147,9 +190,9 @@ class UserDashboard extends Component {
         </Row>
         <br />
         <ModalComponent
-            isOpen={this.state.isVerifyModalOpen}
-            modalBody={<VerifyBatchManufacturer />}
-            closeModal={this.state.closeVerifyModal}
+            isOpen={this.state.isModalOpen}
+            modalBody={this.state.modalBody}
+            closeModal={this.closeModal}
         />
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
@@ -187,10 +230,10 @@ class UserDashboard extends Component {
                           {this.state.batches.length > 0
                             ? this.state.batches.map((entry, index) => {
                                 return (
-                                  <tr key={index} onClick={() => {
-                                      this.openVerifyModal(entry)
-                                  }}>
-                                    <td>{entry["batch_id"]}</td>
+                                  <tr key={index}>
+                                    <td key={index} onClick={() => {
+                                        this.openVerifyModal(entry)
+                                    }}>{entry["batch_id"]}</td>
                                     <td>
                                       {this.getManufacturerStatus(
                                         entry.cur_actor
@@ -205,7 +248,9 @@ class UserDashboard extends Component {
                                     <td>
                                       {this.getEndUserStatus(entry.cur_actor)}
                                     </td>
-                                    <td>
+                                    <td onClick={() => {
+                                        this.openProgressModal(entry["batch_id"])
+                                    }}>
                                       <i
                                         className="fa fa-eye fa-md"
                                         style={{ marginTop: 0 }}
