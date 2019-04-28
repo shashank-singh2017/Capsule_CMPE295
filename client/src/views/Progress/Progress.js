@@ -306,9 +306,9 @@ class Progress extends Component {
           {this.getManufacturerJsx()}
           {this.getArrowJsx()}
           {this.getLogisticsJsx()}
-          this.getArrowJsx()}
+          {this.getArrowJsx()}
           {this.getRetailerJsx()}
-          this.getArrowJsx()}
+          {this.getArrowJsx()}
           {this.getEndUserJsx()}
         </Row>
       );
