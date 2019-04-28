@@ -195,6 +195,29 @@ class Progress extends Component {
     );
   };
 
+  getStatusImg = (data_box) => {
+      if(data_box.length > 0) {
+          return (
+              <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+                <i
+                  className="fa fa-check-circle fa-3x"
+                  style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
+                />
+              </Col>
+          );
+      }
+      else {
+          return (
+              <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
+                <i
+                  className="fa fa-minus-circle fa-3x"
+                  style={{ marginTop: 0, color: "yellow", marginLeft: "20%" }}
+                />
+              </Col>
+          );
+      }
+  };
+
   getNoDataAvailable = () => {
     return (
       <Col xs="12" sm="12" md="12" style={{ marginTop: "3%" }}>
@@ -264,12 +287,8 @@ class Progress extends Component {
               </CardBody>
             </Card>
           </Col>
-          <Col xs="1" sm="1" md="2" style={{ marginTop: "15%" }}>
-            <i
-              className="fa fa-check-circle fa-3x"
-              style={{ marginTop: 0, color: "green", marginLeft: "20%" }}
-            />
-          </Col>
+
+          {this.getStatusImg(this.props.summaryData['user'])}
         </Row>
       </Col>
     );
