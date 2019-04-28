@@ -37,7 +37,7 @@ class VerifyBatchUser extends Component {
                                          Product Id
                                       </Col>
                                       <Col md="8">
-                                        {this.props.summaryData['data_man'][0]}
+                                        {this.props.summaryData['man'][0]}
                                       </Col>
                                   </Row>
 
@@ -46,7 +46,7 @@ class VerifyBatchUser extends Component {
                                          Manufacturer Reg. No.
                                       </Col>
                                       <Col md="8">
-                                        {this.props.summaryData['data_man'][1]}
+                                        {this.props.summaryData['man'][1]}
                                       </Col>
                                   </Row>
 
@@ -55,7 +55,7 @@ class VerifyBatchUser extends Component {
                                          Manufacturer Name
                                       </Col>
                                       <Col md="8">
-                                        {this.props.summaryData['data_man'][2]}
+                                        {this.props.summaryData['man'][2]}
                                       </Col>
                                   </Row>
 
@@ -64,7 +64,7 @@ class VerifyBatchUser extends Component {
                                          Manufacturer Address
                                       </Col>
                                       <Col md="8">
-                                         {this.props.summaryData['data_man'][3]}
+                                         {this.props.summaryData['man'][3]}
                                       </Col>
                                   </Row>
 
@@ -73,7 +73,7 @@ class VerifyBatchUser extends Component {
                                          Type Of Drug
                                       </Col>
                                       <Col md="8">
-                                        {this.props.summaryData['data_man'][4]}
+                                        {this.props.summaryData['man'][4]}
                                       </Col>
                                   </Row>
 
@@ -82,7 +82,7 @@ class VerifyBatchUser extends Component {
                                          Logistics Handler
                                       </Col>
                                       <Col md="8">
-                                        {this.props.summaryData['data_man'][5]}
+                                        {this.props.summaryData['man'][5]}
                                       </Col>
                                   </Row>
 
@@ -91,7 +91,7 @@ class VerifyBatchUser extends Component {
                                          Lab Test Results
                                       </Col>
                                       <Col md="8">
-                                        {this.props.summaryData['data_man'][6]}
+                                        {this.props.summaryData['man'][6]}
                                       </Col>
                                   </Row>
 
@@ -132,7 +132,7 @@ class VerifyBatchUser extends Component {
                                      Product Id
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_log'][0]}
+                                    {this.props.summaryData['log'][0]}
                                   </Col>
                               </Row>
 
@@ -141,7 +141,7 @@ class VerifyBatchUser extends Component {
                                      Destination Name
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_log'][1]}
+                                     {this.props.summaryData['log'][1]}
                                   </Col>
                               </Row>
 
@@ -150,7 +150,7 @@ class VerifyBatchUser extends Component {
                                      Destination Address
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_log'][2]}
+                                    {this.props.summaryData['log'][2]}
                                   </Col>
                               </Row>
 
@@ -159,7 +159,7 @@ class VerifyBatchUser extends Component {
                                      Shipment Number
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_log'][3]}
+                                    {this.props.summaryData['log'][3]}
                                   </Col>
                               </Row>
 
@@ -168,7 +168,7 @@ class VerifyBatchUser extends Component {
                                      Quantity
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_log'][4]}
+                                     {this.props.summaryData['log'][4]}
                                   </Col>
                               </Row>
 
@@ -177,7 +177,7 @@ class VerifyBatchUser extends Component {
                                      Departure Time
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_log'][5]}
+                                    {this.props.summaryData['log'][5]}
                                   </Col>
                               </Row>
 
@@ -186,7 +186,7 @@ class VerifyBatchUser extends Component {
                                      Estimated Arrival Time
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_log'][6]}
+                                     {this.props.summaryData['log'][6]}
                                   </Col>
                               </Row>
 
@@ -226,7 +226,7 @@ class VerifyBatchUser extends Component {
                                      Product Id
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_ret'][0]}
+                                    {this.props.summaryData['ret'][0]}
                                   </Col>
                               </Row>
 
@@ -235,7 +235,7 @@ class VerifyBatchUser extends Component {
                                      Arrival Time
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_ret'][1]}
+                                     {this.props.summaryData['ret'][1]}
                                   </Col>
                               </Row>
 
@@ -244,7 +244,7 @@ class VerifyBatchUser extends Component {
                                      Quantity
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_ret'][2]}
+                                    {this.props.summaryData['ret'][2]}
                                   </Col>
                               </Row>
 
@@ -253,7 +253,7 @@ class VerifyBatchUser extends Component {
                                      Shipment Number
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_ret'][3]}
+                                    {this.props.summaryData['ret'][3]}
                                   </Col>
                               </Row>
 
@@ -262,7 +262,7 @@ class VerifyBatchUser extends Component {
                                      Warehouse Name
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_ret'][4]}
+                                     {this.props.summaryData['ret'][4]}
                                   </Col>
                               </Row>
 
@@ -271,7 +271,7 @@ class VerifyBatchUser extends Component {
                                      Damaged Items
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_ret'][5]}
+                                    {this.props.summaryData['ret'][5]}
                                   </Col>
                               </Row>
 
@@ -280,7 +280,7 @@ class VerifyBatchUser extends Component {
                                      Damaged Items Qty.
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_ret'][6]}
+                                     {this.props.summaryData['ret'][6]}
                                   </Col>
                               </Row>
 
@@ -320,7 +320,7 @@ class VerifyBatchUser extends Component {
                                      Product Id
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_user'][0]}
+                                    {this.props.summaryData['user'][0]}
                                   </Col>
                               </Row>
 
@@ -329,7 +329,7 @@ class VerifyBatchUser extends Component {
                                      Drug Name
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_user'][1]}
+                                     {this.props.summaryData['user'][1]}
                                   </Col>
                               </Row>
 
@@ -338,7 +338,7 @@ class VerifyBatchUser extends Component {
                                      Quantity
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_user'][2]}
+                                    {this.props.summaryData['user'][2]}
                                   </Col>
                               </Row>
 
@@ -347,7 +347,7 @@ class VerifyBatchUser extends Component {
                                      Arrival Time
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_user'][3]}
+                                    {this.props.summaryData['user'][3]}
                                   </Col>
                               </Row>
 
@@ -356,7 +356,7 @@ class VerifyBatchUser extends Component {
                                      Product Rating
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_user'][4]}
+                                     {this.props.summaryData['user'][4]}
                                   </Col>
                               </Row>
 
@@ -365,7 +365,7 @@ class VerifyBatchUser extends Component {
                                      Delivery Rating
                                   </Col>
                                   <Col md="8">
-                                    {this.props.summaryData['data_user'][5]}
+                                    {this.props.summaryData['user'][5]}
                                   </Col>
                               </Row>
 
@@ -374,7 +374,7 @@ class VerifyBatchUser extends Component {
                                      Feedback Comments
                                   </Col>
                                   <Col md="8">
-                                     {this.props.summaryData['data_user'][6]}
+                                     {this.props.summaryData['user'][6]}
                                   </Col>
                               </Row>
                               </CardBody>
