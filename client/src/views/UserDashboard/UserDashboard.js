@@ -26,7 +26,8 @@ class UserDashboard extends Component {
       modalBody: "dfhevfhjew",
       modalTitle: "Modal title",
       isModalOpen: false,
-      cur_batchId: ""
+      cur_batchId: "",
+      batchData_display: []
     };
   }
 
@@ -175,9 +176,28 @@ class UserDashboard extends Component {
     console.log("After setting the batchId:", this.state.cur_batchId);
   };
 
-  openProgressModal = batchId => {
+  openProgressModal = batchData => {
     // get the batch Details
-    console.log("BatchId: ", batchId);
+    console.log("BatchData: ", batchData);
+
+    let batchData_display_temp = [];
+
+    if(batchData.cur_actor === 'MANUFACTURER') {
+        batchData_display_temp = batchData_display_temp;
+    }
+    else if(batchData.cur_actor === 'LOGISTICS') {
+        // get maufacturer Data and set to batchData_display_temp
+        storage.methods.getManufacturerData(batchData.batch_id).call().then(data => {
+            console.log(data);
+        })
+
+    }
+
+
+
+
+
+
 
     this.setState({
       modalBody: <Progress />,
@@ -268,7 +288,7 @@ class UserDashboard extends Component {
                                     <td
                                       onClick={() => {
                                         this.openProgressModal(
-                                          entry["batch_id"]
+                                          entry
                                         );
                                       }}
                                     >
