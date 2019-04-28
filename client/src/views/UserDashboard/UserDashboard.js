@@ -191,7 +191,30 @@ class UserDashboard extends Component {
         .getManufacturerData(batchData.batch_id)
         .call()
         .then(data => {
-          console.log(data);
+            storage.methods
+              .getManufacturerData(batchData.batch_id)
+              .call()
+              .then(data => {
+                console.log("manufacturer data", data);
+
+                let data_man = [];
+
+                data_man.push(data["0"]);
+                data_man.push(data["1"]);
+                data_man.push(data["2"]);
+                data_man.push(data["3"]);
+                data_man.push(data["4"]);
+                data_man.push(data["5"]);
+                data_man.push(data["6"]);
+
+                batchData_display_temp["man"] = data_man;
+
+                this.setState({
+                  // batchData_display: summaryData
+                  modalBody: <Progress summaryData={batchData_display_temp} />,
+                  isModalOpen: true
+                });
+              })
         });
     } else if (batchData.cur_actor === "RETAILER") {
       console.log(batchData.cur_actor);
@@ -315,75 +338,96 @@ class UserDashboard extends Component {
             });
         });
     } else if (batchData.cur_actor === "DONE") {
-      storage.methods
-        .getManufacturerData(batchData.batch_id)
-        .call()
-        .then(data => {
-          console.log("manufacturer data", data);
 
-          let data_man = [];
+        storage.methods
+          .getManufacturerData(batchData.batch_id)
+          .call()
+          .then(data => {
+            console.log("manufacturer data", data);
 
-          data_man.push(data["0"]);
-          data_man.push(data["1"]);
-          data_man.push(data["2"]);
-          data_man.push(data["3"]);
-          data_man.push(data["4"]);
-          data_man.push(data["5"]);
-          data_man.push(data["6"]);
+            let data_man = [];
 
-          batchData_display_temp["man"] = data_man;
-        });
+            data_man.push(data["0"]);
+            data_man.push(data["1"]);
+            data_man.push(data["2"]);
+            data_man.push(data["3"]);
+            data_man.push(data["4"]);
+            data_man.push(data["5"]);
+            data_man.push(data["6"]);
 
-      storage.methods
-        .getLogisticsData(batchData.batch_id)
-        .call()
-        .then(data => {
-          console.log("logistics data", data);
+            batchData_display_temp["man"] = data_man;
+            return batchData_display_temp;
+          })
+          .then(summaryData => {
+            console.log("data: ", summaryData);
 
-          let data_log = [];
-          data_log.push(data["0"]);
-          data_log.push(data["1"]);
-          data_log.push(data["2"]);
-          data_log.push(data["3"]);
-          data_log.push(data["4"]);
-          data_log.push(data["5"]);
-          data_log.push(data["6"]);
+            storage.methods
+              .getLogisticsData(batchData.batch_id)
+              .call()
+              .then(data => {
+                console.log("logistics data", data);
 
-          batchData_display_temp["log"] = data_log;
-        });
-      storage.methods
-        .getRetailerData(batchData.batch_id)
-        .call()
-        .then(data => {
-          console.log("Retailer data", data);
+                let data_log = [];
+                data_log.push(data["0"]);
+                data_log.push(data["1"]);
+                data_log.push(data["2"]);
+                data_log.push(data["3"]);
+                data_log.push(data["4"]);
+                data_log.push(data["5"]);
+                data_log.push(data["6"]);
 
-          let data_ret = [];
-          data_ret.push(data["0"]);
-          data_ret.push(data["1"]);
-          data_ret.push(data["2"]);
-          data_ret.push(data["3"]);
-          data_ret.push(data["4"]);
-          data_ret.push(data["5"]);
-          data_ret.push(data["6"]);
+                summaryData["log"] = data_log;
 
-          batchData_display_temp["ret"] = data_ret;
-        });
+                console.log("Summary Data: ", summaryData);
 
-      storage.methods
-        .getEndUserData(batchData.batch_id)
-        .call()
-        .then(data => {
-          let data_user = [];
-          data_user.push(data["0"]);
-          data_user.push(data["1"]);
-          data_user.push(data["2"]);
-          data_user.push(data["3"]);
-          data_user.push(data["4"]);
-          data_user.push(data["5"]);
-          data_user.push(data["6"]);
+                return summaryData;
+              });
+          })
+          .then(summaryData => {
+            storage.methods
+              .getRetailerData(batchData.batch_id)
+              .call()
+              .then(data => {
+                console.log("Retailer data", data);
 
-          batchData_display_temp["user"] = data_user;
-        });
+                let data_ret = [];
+                data_ret.push(data["0"]);
+                data_ret.push(data["1"]);
+                data_ret.push(data["2"]);
+                data_ret.push(data["3"]);
+                data_ret.push(data["4"]);
+                data_ret.push(data["5"]);
+                data_ret.push(data["6"]);
+
+                summaryData["ret"] = data_ret;
+
+                return summaryData;
+              });
+          })
+          .then(summaryData => {
+
+              storage.methods
+                .getEndUserData(batchData.batch_id)
+                .call()
+                .then(data => {
+                  let data_user = [];
+                  data_user.push(data["0"]);
+                  data_user.push(data["1"]);
+                  data_user.push(data["2"]);
+                  data_user.push(data["3"]);
+                  data_user.push(data["4"]);
+                  data_user.push(data["5"]);
+                  data_user.push(data["6"]);
+
+                  summaryData["user"] = data_user;
+
+                  this.setState({
+                    // batchData_display: summaryData
+                    modalBody: <Progress summaryData={summaryData} />,
+                    isModalOpen: true
+                  });
+                });
+          })
     }
   };
 
