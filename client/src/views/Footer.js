@@ -10,12 +10,6 @@ class Footer extends Component {
                 <div className="col-sm-6" style={{textAlign: 'left',paddingLeft: '5%', paddingTop: '1%'}}>
                     @copyright capsuleApp 2018
                 </div>
-                <div className="col-sm-3" style={{textAlign: 'left',paddingLeft: '5%', paddingTop: '1%'}}>
-                    right1
-                </div>
-                <div className="col-sm-3" style={{textAlign: 'left',paddingLeft: '5%', paddingTop: '1%'}}>
-                    right 2
-                </div>
             </div>
       </div>
     );

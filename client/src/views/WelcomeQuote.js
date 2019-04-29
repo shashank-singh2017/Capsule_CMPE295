@@ -4,7 +4,7 @@ import '../stylesheets/welcome-quote.css';
 class WelcomeQuote extends Component {
   render() {
     return (
-      <div className="container-fluid" style={{paddingTop: 30, paddingBottom: 40, backgroundColor: '#fbf1fb'}}>
+      <div className="container-fluid" style={{paddingTop: 30, paddingBottom: 40, paddingLeft: '3%', backgroundColor: '#fbf1fb'}}>
             <h1>Welcome to Capsule</h1>
             <br/>
             <br/>

@@ -34,7 +34,7 @@ class UserDashboard extends Component {
   }
 
   componentDidMount = () => {
-    if(localStorage.getItem('cur_address') === '') {
+    if(localStorage.getItem('cur_address') === null || localStorage.getItem('cur_address').length === 0) {
         swal('You are not logged in!!')
         .then(() => {
             this.props.history.push('/login');
@@ -491,7 +491,7 @@ class UserDashboard extends Component {
   };
 
   render() {
-      if(localStorage.getItem('cur_address') === '') {
+      if(localStorage.getItem('cur_address') === null || localStorage.getItem('cur_address').length === 0) {
           swal('You are not logged in!!')
           .then(() => {
               this.props.history.push('/login');

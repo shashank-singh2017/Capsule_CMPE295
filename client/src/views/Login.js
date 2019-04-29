@@ -67,13 +67,26 @@ class Login extends Component {
     });
   };
 
+  logout = () => {
+
+    localStorage.setItem("cur_fname", "");
+    localStorage.setItem("cur_lname", "");
+    localStorage.setItem("cur_email", "");
+    localStorage.setItem("cur_type", "");
+    localStorage.setItem("cur_address", "");
+
+    swal("You have Logged out Successfully!").then(value => {
+      this.props.history.push("/login");
+    });
+  };
+
   render() {
     return (
       <div
         className="container-fluid"
         style={{ height: "100%", paddingBottom: "2%" }}
       >
-        <Header />
+        <Header logout={this.logout}/>
 
         <div className="row box-login" style={{ paddingTop: "2%" }}>
           <h1>Login</h1>
