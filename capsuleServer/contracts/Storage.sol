@@ -11,6 +11,7 @@ contract Storage {
         address currentOwner;
         address nextParty;
         bool isDeclined;
+        string curParty;
     }
 
 
@@ -111,14 +112,15 @@ contract Storage {
         userBatches[endUserAdd] = endUserBatches;
         exists[endUserAdd] = true;
         batchDetailsData.product = product;
+        batchDetailsData.curParty = 'MANUFACTURER';
         batch[batchId] = batchDetailsData;
         nextAction[batchId] = 'MANUFACTURER';
         return batchId;
     }
 
-    function getBatch(address batchId) public view returns(address manufacturerAdd, address logisticsAdd, address retailerAdd, address endUserAdd, string product, bool isDeclined) {
+    function getBatch(address batchId) public view returns(address manufacturerAdd, address logisticsAdd, address retailerAdd, address endUserAdd, string product, bool isDeclined, string curParty) {
         batchDetails memory tmpData = batch[batchId];
-        return (tmpData.manufacturerAdd, tmpData.logisticsAdd, tmpData.retailerAdd, tmpData.endUserAdd, tmpData.product, tmpData.isDeclined);
+        return (tmpData.manufacturerAdd, tmpData.logisticsAdd, tmpData.retailerAdd, tmpData.endUserAdd, tmpData.product, tmpData.isDeclined, tmpData.curParty);
     }
 
     function getallBatchIds() public view returns(address[]) {
@@ -146,6 +148,7 @@ contract Storage {
         manufacturerDetailsData.productId = productId;
 
         manufacturer[batchId] = manufacturerDetailsData;
+        batch[batchId].curParty = 'LOGISTICS';
         nextAction[batchId] = 'LOGISTICS';
 
         return true;
@@ -169,6 +172,7 @@ contract Storage {
         logisticsDetailsData.productId = productId;
 
         logistics[batchId] = logisticsDetailsData;
+        batch[batchId].curParty = 'RETAILER';
         nextAction[batchId] = 'RETAILER';
 
         return true;
@@ -192,6 +196,7 @@ contract Storage {
         retailerDetailsData.productId = productId;
 
         retailer[batchId] = retailerDetailsData;
+        batch[batchId].curParty = 'ENDUSER';
         nextAction[batchId] = 'ENDUSER';
 
         return true;
@@ -217,7 +222,7 @@ contract Storage {
         endUserDetailsData.reviewComments = reviewComments;
 
         endUser[batchId] = endUserDetailsData;
-
+        batch[batchId].curParty = 'DONE';
         nextAction[batchId] = 'DONE';
         return true;
     }

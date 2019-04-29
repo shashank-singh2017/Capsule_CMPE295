@@ -1,6 +1,6 @@
 import web3 from "./web3";
 
-const address = "0xd20321e0f243BA5B0A51487bBb1644163a07222c";
+const address = "0x08C277Bb04905020090ab8f8BBc72ae0F15Ed6e6";
 
 const abi = [
   {
@@ -30,7 +30,8 @@ const abi = [
       { name: "retailerAdd", type: "address" },
       { name: "endUserAdd", type: "address" },
       { name: "product", type: "string" },
-      { name: "isDeclined", type: "bool" }
+      { name: "isDeclined", type: "bool" },
+      { name: "curParty", type: "string" }
     ],
     payable: false,
     stateMutability: "view",
@@ -211,5 +212,4 @@ const abi = [
     type: "function"
   }
 ];
-
 export default new web3.eth.Contract(abi, address);
