@@ -93,82 +93,82 @@ class UserDashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 0) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="danger">Declined</Badge>;
+      }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 0 && user_index <= 4) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true && user_index === 0) {
+        return <Badge color="danger">Declined</Badge>;
+      }
       return <Badge color="success">Completed</Badge>;
     } else if (user_index > 4) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="danger">Declined</Badge>;
+      }
       return <Badge>Not Available</Badge>;
     }
   };
 
-  getLogisticsStatus = user => {
+  getLogisticsStatus = (user, is_declined) => {
     const user_index = this.getUserIndex(user);
-
+    console.log(user_index);
     if (user_index === 1) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 1) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge color="success">Completed</Badge>;
     } else {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge>Not Available</Badge>;
     }
   };
 
-  getRetailerStatus = user => {
+  getRetailerStatus = (user, is_declined) => {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 2) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 2) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge color="success">Completed</Badge>;
     } else {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge>NotAvailable</Badge>;
     }
   };
 
-  getEndUserStatus = user => {
+  getEndUserStatus = (user, is_declined) => {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 3) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 3) {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge color="success">Completed</Badge>;
     } else {
-        if(is_declined === true) {
-            return <Badge color="warning">Declined</Badge>;
-        }
+      if (is_declined === true) {
+        return <Badge color="warning">Declined</Badge>;
+      }
       return <Badge>NotAvailable</Badge>;
     }
   };
@@ -463,10 +463,12 @@ class UserDashboard extends Component {
         <tr key={index} style={{ backgroundColor: "red" }}>
           <td key={index}>{entry["batch_id"]}</td>
 
-          <td>{this.getManufacturerStatus(entry.cur_actor)}</td>
-          <td>{this.getLogisticsStatus(entry.cur_actor)}</td>
-          <td>{this.getRetailerStatus(entry.cur_actor)}</td>
-          <td>{this.getEndUserStatus(entry.cur_actor)}</td>
+          <td>
+            {this.getManufacturerStatus(entry.cur_actor, entry.is_declined)}
+          </td>
+          <td>{this.getLogisticsStatus(entry.cur_actor, entry.is_declined)}</td>
+          <td>{this.getRetailerStatus(entry.cur_actor, entry.is_declined)}</td>
+          <td>{this.getEndUserStatus(entry.cur_actor, entry.is_declined)}</td>
           <td
             onClick={() => {
               this.openProgressModal(entry);
