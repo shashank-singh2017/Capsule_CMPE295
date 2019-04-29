@@ -38,6 +38,12 @@ class VerifyBatchManufacturer extends Component {
       });
   };
 
+  declineBatch = (batchId) => {
+      console.log("batch Id: ", batchId);
+
+
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -152,7 +158,13 @@ class VerifyBatchManufacturer extends Component {
           </div>
 
           <button type="submit" class="btn btn-primary">
-            Submit
+            Verify
+          </button>
+
+          <button class="btn btn-danger" onClick={() => {
+              this.declineBatch(this.props.batchId)
+          }}>
+            Decline
           </button>
         </form>
       </div>

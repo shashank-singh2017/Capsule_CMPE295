@@ -9,8 +9,9 @@ import VerifyBatchUser from "../Forms/VerifyBatchUser";
 import VerifyBatchRetailer from "../Forms/VerifyBatchRetailer";
 import VerifyBatchLogistics from "../Forms/VerifyBatchLogistics";
 import Progress from "../Progress/Progress";
-
 import storage from "../../storage";
+
+import swal from 'sweetalert';
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -27,7 +28,8 @@ class UserDashboard extends Component {
       modalTitle: "Modal title",
       isModalOpen: false,
       cur_batchId: "",
-      batchData_display: []
+      batchData_display: [],
+      isAlertOpen: false
     };
   }
 
@@ -399,10 +401,26 @@ class UserDashboard extends Component {
     });
   };
 
+  logout = () => {
+      console.log("Logout clicked, localStorage", localStorage);
+      localStorage.setItem("cur_fname", "");
+      localStorage.setItem("cur_lname", "");
+      localStorage.setItem("cur_email", "");
+      localStorage.setItem("cur_type", "");
+      localStorage.setItem("cur_address", "");
+
+      console.log("localStorage after resetting: ", localStorage);
+
+      swal("You have Logged out Successfully!")
+      .then(value => {
+          this.props.history.push('/login');
+      })
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
-        <Header />
+        <Header logout={this.logout} />
         <Row style={{ paddingLeft: "3%", backgroundColor: "gray" }}>
           <h3 style={{ paddingTop: 5 }}>User Dashboard</h3>
         </Row>

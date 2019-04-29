@@ -17,10 +17,10 @@ class App extends Component {
         <div>
           <Route path="/" exact={true} render={props => <MainPage />} />
           <Route path="/signup" exact={true} render={props => <Signup />} />
-          <Route path="/login" render={props => <Login />} />
+          <Route path="/login" render={props => <Login {...props}/>} />
           <Route path="/Home" render={props => <MainPage />} />
           <Route path="/AdminDashboard" render={props => <Dashboard />} />
-          <Route path="/UserDashboard" render={props => <UserDashboard />} />
+          <Route path="/UserDashboard" render={props => <UserDashboard {...props}/>} />
         </div>
       </BrowserRouter>
     );

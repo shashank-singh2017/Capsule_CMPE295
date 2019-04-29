@@ -305,10 +305,21 @@ class Dashboard extends Component {
     }
   };
 
+  logout = () => {
+      console.log("Logout clicked, localStorage", localStorage);
+      localStorage.setItem("cur_fname", "");
+      localStorage.setItem("cur_lname", "");
+      localStorage.setItem("cur_email", "");
+      localStorage.setItem("cur_type", "");
+      localStorage.setItem("cur_address", "");
+
+      console.log("localStorage after resetting: ", localStorage);
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
-        <Header />
+        <Header logout={this.logout}/>
         <Container fluid={true}>
           <Row>
             <Col xs="2" sm="2" lg="2">

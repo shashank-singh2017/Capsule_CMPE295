@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import "../stylesheets/header-transparent.css";
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount = () => {
+        console.log("props: ", this.props);
+    }
   render() {
     return (
       <div className="container-fluid">
@@ -46,14 +54,7 @@ class Header extends Component {
             <span>
               <p
                 onClick={() => {
-                  console.log("Logout clicked, localStorage", localStorage);
-                  localStorage.setItem("cur_fname", "");
-                  localStorage.setItem("cur_lname", "");
-                  localStorage.setItem("cur_email", "");
-                  localStorage.setItem("cur_type", "");
-                  localStorage.setItem("cur_address", "");
-
-                  console.log("localStorage after resetting: ", localStorage);
+                  this.props.logout()
                 }}
               >
                 Logout

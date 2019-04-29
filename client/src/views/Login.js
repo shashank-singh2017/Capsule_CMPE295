@@ -3,20 +3,25 @@ import "../stylesheets/login-signup.css";
 import Header from "./Header";
 import web3 from "../web3";
 import capsuleUser from "../capsuleUser";
+import swal from 'sweetalert';
 
 const myAccount = "0x7Ebf0931004CC7B1161B091e1381A56926c2A5db";
 
 class Login extends Component {
-  state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    userType: "",
-    balance: "",
-    value: "",
-    message: "",
-    address: ""
-  };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          firstName: "",
+          lastName: "",
+          email: "",
+          userType: "",
+          balance: "",
+          value: "",
+          message: "",
+          address: ""
+        };
+    }
 
   async componentDidMount() {
     const {
@@ -37,9 +42,13 @@ class Login extends Component {
     console.log(accounts);
 
     this.setState({
-      message: "Trying to login...",
       value: "0.01"
     });
+
+    swal("You have Logged in Successfully !!")
+    .then(value => {
+        this.props.history.push('/UserDashboard');
+    })
 
     const user = await capsuleUser.methods.getUser(this.state.address).call();
 
@@ -94,8 +103,6 @@ class Login extends Component {
             </button>
           </form>
         </div>
-        <hr />
-        <h1>{this.state.message}</h1>
       </div>
     );
   }
