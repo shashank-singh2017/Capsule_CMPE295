@@ -422,6 +422,35 @@ class UserDashboard extends Component {
     console.log("entry: ", entry);
     console.log("index: ", index);
 
+    if(entry.is_declined === true) {
+        return (
+            <tr key={index} style={{backgroundColor: 'red'}}>
+              <td
+                key={index}
+                onClick={() => {
+                  this.openVerifyModal(entry);
+                }}
+                disabled="true"
+              >
+                {entry["batch_id"]}
+              </td>
+
+              <td>{this.getManufacturerStatus(entry.cur_actor)}</td>
+              <td>{this.getLogisticsStatus(entry.cur_actor)}</td>
+              <td>{this.getRetailerStatus(entry.cur_actor)}</td>
+              <td>{this.getEndUserStatus(entry.cur_actor)}</td>
+              <td
+                onClick={() => {
+                  this.openProgressModal(entry);
+                }}
+              >
+                <i className="fa fa-eye fa-md" style={{ marginTop: 0 }} />
+              </td>
+            </tr>
+        );
+    }
+    else {
+
     return (
       <tr key={index}>
         <td
@@ -447,6 +476,7 @@ class UserDashboard extends Component {
         </td>
       </tr>
     );
+}
   };
 
   render() {
