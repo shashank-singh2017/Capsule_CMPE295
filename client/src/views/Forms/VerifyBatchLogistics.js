@@ -20,8 +20,6 @@ class VerifyBatchLogistics extends Component {
     event.preventDefault();
     let accounts = await web3.eth.getAccounts();
 
-    console.log(this.props.batchId);
-
     await storage.methods
       .setLogisticsData(
         this.props.batchId,
@@ -40,8 +38,6 @@ class VerifyBatchLogistics extends Component {
 
   declineBatch = async batchId => {
     let accounts = await web3.eth.getAccounts();
-
-    console.log(accounts);
 
     storage.methods.setIsDeclined(batchId).send({
       from: accounts[0]

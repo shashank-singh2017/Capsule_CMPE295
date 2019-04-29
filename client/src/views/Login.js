@@ -82,14 +82,14 @@ class Login extends Component {
             style={{ width: "100%", marginTop: 20 }}
             onSubmit={this.onSubmit}
           >
-            <div class="form-group">
-              <label for="exampleInputPassword1" style={{ float: "left" }}>
+            <div className="form-group">
+              <label htmlFor="exampleInputPassword1" style={{ float: "left" }}>
                 Ether Address
               </label>
               <input
                 name={this.state.address}
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="eth_add"
                 placeholder="Ether Address"
                 onChange={event =>
@@ -98,7 +98,7 @@ class Login extends Component {
               />
             </div>
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>

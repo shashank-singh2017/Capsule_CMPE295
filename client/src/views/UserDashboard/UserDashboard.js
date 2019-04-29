@@ -34,6 +34,13 @@ class UserDashboard extends Component {
   }
 
   componentDidMount = () => {
+    if(localStorage.getItem('cur_address') === '') {
+        swal('You are not logged in!!')
+        .then(() => {
+            this.props.history.push('/login');
+        })
+    }
+    else {
     storage.methods
       .getUserBatchIds(this.state.address)
       .call()
@@ -50,7 +57,7 @@ class UserDashboard extends Component {
             .getBatch(batchIds[i])
             .call()
             .then(cur_batch_detail => {
-              console.log("batch_detail: ", cur_batch_detail);
+
               temp_details["cur_actor"] = cur_batch_detail[6];
               temp_details["is_declined"] = cur_batch_detail[5];
 
@@ -67,11 +74,8 @@ class UserDashboard extends Component {
             });
         }
       });
+  }
   };
-
-  loading = () => (
-    <div className="animated fadeIn pt-1 text-center">Loading...</div>
-  );
 
   getUserIndex = user => {
     if (user === "MANUFACTURER") {
@@ -107,7 +111,7 @@ class UserDashboard extends Component {
 
   getLogisticsStatus = (user, is_declined) => {
     const user_index = this.getUserIndex(user);
-    console.log(user_index);
+
     if (user_index === 1) {
       if (is_declined === true) {
         return <Badge color="warning">Declined</Badge>;
@@ -151,7 +155,7 @@ class UserDashboard extends Component {
 
       return <Badge color="success">Completed</Badge>;
     } else {
-      
+
       return <Badge>NotAvailable</Badge>;
     }
   };
@@ -423,14 +427,12 @@ class UserDashboard extends Component {
   };
 
   logout = () => {
-    console.log("Logout clicked, localStorage", localStorage);
+
     localStorage.setItem("cur_fname", "");
     localStorage.setItem("cur_lname", "");
     localStorage.setItem("cur_email", "");
     localStorage.setItem("cur_type", "");
     localStorage.setItem("cur_address", "");
-
-    console.log("localStorage after resetting: ", localStorage);
 
     swal("You have Logged out Successfully!").then(value => {
       this.props.history.push("/login");
@@ -438,8 +440,6 @@ class UserDashboard extends Component {
   };
 
   getRow = (entry, index) => {
-    console.log("entry: ", entry);
-    console.log("index: ", index);
 
     if (entry.is_declined === true) {
       return (
@@ -491,6 +491,17 @@ class UserDashboard extends Component {
   };
 
   render() {
+      if(localStorage.getItem('cur_address') === '') {
+          swal('You are not logged in!!')
+          .then(() => {
+              this.props.history.push('/login');
+          })
+
+        return (
+            <div>
+            </div>
+        );
+      }
     return (
       <div className="animated fadeIn">
         <Header logout={this.logout} />

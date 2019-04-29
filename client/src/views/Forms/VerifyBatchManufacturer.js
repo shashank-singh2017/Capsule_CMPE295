@@ -20,8 +20,6 @@ class VerifyBatchManufacturer extends Component {
     event.preventDefault();
     let accounts = await web3.eth.getAccounts();
 
-    console.log(this.props.batchId);
-
     await storage.methods
       .setManufacturerData(
         this.props.batchId,
@@ -38,8 +36,12 @@ class VerifyBatchManufacturer extends Component {
       });
   };
 
-  declineBatch = batchId => {
-    console.log("batch Id: ", batchId);
+  declineBatch = async batchId => {
+    let accounts = await web3.eth.getAccounts();
+
+    storage.methods.setIsDeclined(batchId).send({
+      from: accounts[0]
+    });
   };
 
   render() {
@@ -168,6 +170,16 @@ class VerifyBatchManufacturer extends Component {
             Decline
           </button>
         </form>
+
+        <button
+          class="btn btn-danger"
+          onClick={() => {
+            this.declineBatch(this.props.batchId);
+          }}
+        >
+          Decline
+        </button>
+        
       </div>
     );
   }

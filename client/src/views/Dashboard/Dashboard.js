@@ -52,7 +52,6 @@ class Dashboard extends Component {
         return batchIds;
       })
       .then(batchIds => {
-        console.log(batchIds);
         let currentBatches = [];
         for (var i = 0; i < batchIds.length; i++) {
           let temp_details = {};
@@ -62,16 +61,12 @@ class Dashboard extends Component {
             .getNextAction(batchIds[i])
             .call()
             .then(cur_party => {
-              console.log(cur_party);
               temp_details["cur_actor"] = cur_party;
 
               return temp_details;
             })
             .then(data => {
-              console.log(data);
               currentBatches.push(data);
-              console.log(batchIds.length);
-              console.log(currentBatches.length);
 
               if (currentBatches.length === batchIds.length) {
                 this.setState({
@@ -89,7 +84,6 @@ class Dashboard extends Component {
         return user_addresses;
       })
       .then(user_addresses => {
-        console.log(user_addresses);
         let userDetails = [];
         for (var i = 0; i < user_addresses.length; i++) {
           let temp_details = {};
@@ -99,7 +93,7 @@ class Dashboard extends Component {
             .getUser(user_addresses[i])
             .call()
             .then(cur_user => {
-              console.log(cur_user);
+
               temp_details["fname"] = cur_user[0];
               temp_details["lname"] = cur_user[1];
               temp_details["email"] = cur_user[2];
@@ -107,11 +101,11 @@ class Dashboard extends Component {
               return temp_details;
             })
             .then(data => {
-              console.log(data);
+
               userDetails.push(data);
 
               if (userDetails.length === user_addresses.length) {
-                console.log(userDetails);
+
                 this.setState({
                   user_details: userDetails
                 });
@@ -173,7 +167,7 @@ class Dashboard extends Component {
   };
 
   openProgressModal = () => {
-    console.log("inside openProgressModal");
+
 
     this.setState({
       progressModalBody: ["123", "234", "345", "567"],
@@ -209,8 +203,6 @@ class Dashboard extends Component {
 
   getManufacturerStatus = user => {
     const user_index = this.getUserIndex(user);
-
-    console.log("cur_actor: ", user_index);
 
     if (user_index === 0) {
       return (
@@ -304,17 +296,6 @@ class Dashboard extends Component {
       );
     }
   };
-
-  logout = () => {
-      console.log("Logout clicked, localStorage", localStorage);
-      localStorage.setItem("cur_fname", "");
-      localStorage.setItem("cur_lname", "");
-      localStorage.setItem("cur_email", "");
-      localStorage.setItem("cur_type", "");
-      localStorage.setItem("cur_address", "");
-
-      console.log("localStorage after resetting: ", localStorage);
-  }
 
   render() {
     return (

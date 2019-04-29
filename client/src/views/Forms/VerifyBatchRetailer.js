@@ -36,6 +36,14 @@ class VerifyBatchRetailer extends Component {
       });
   };
 
+  declineBatch = async batchId => {
+    let accounts = await web3.eth.getAccounts();
+
+    storage.methods.setIsDeclined(batchId).send({
+      from: accounts[0]
+    });
+  };
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -153,6 +161,16 @@ class VerifyBatchRetailer extends Component {
             Submit
           </button>
         </form>
+
+        <button
+          class="btn btn-danger"
+          onClick={() => {
+            this.declineBatch(this.props.batchId);
+          }}
+        >
+          Decline
+        </button>
+
       </div>
     );
   }

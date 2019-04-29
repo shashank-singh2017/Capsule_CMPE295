@@ -1,15 +1,40 @@
 import React, { Component } from "react";
 import "../stylesheets/header-transparent.css";
 
+import { Button } from 'reactstrap';
+
 class Header extends Component {
 
     constructor(props) {
         super(props);
     }
 
-    componentDidMount = () => {
-        console.log("props: ", this.props);
+    getLoginLink = () => {
+        if(localStorage.getItem('cur_address') === '') {
+            return (
+                <li className="nav-item">
+                  <a className="nav-link" href="/login" style={{ color: "white" }}>
+                    Login
+                  </a>
+                </li>
+            );
+        }
     }
+
+    getLogoutLink = () => {
+        if(localStorage.getItem('cur_address') !== '') {
+            return (
+                <span>
+                  <Button block outline color="primary"  onClick={() => {
+                    this.props.logout()
+                  }}>
+                    Logout
+                  </Button>
+                </span>
+            );
+        }
+    }
+
   render() {
     return (
       <div className="container-fluid">
@@ -35,31 +60,10 @@ class Header extends Component {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="/" style={{ color: "white" }}>
-                  Services{" "}
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/" style={{ color: "white" }}>
-                  Login
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/" style={{ color: "white" }}>
-                  Signup
-                </a>
-              </li>
+              {this.getLoginLink()}
             </ul>
-            <span>
-              <p
-                onClick={() => {
-                  this.props.logout()
-                }}
-              >
-                Logout
-              </p>
-            </span>
+
+            {this.getLogoutLink()}
           </div>
         </nav>
       </div>
