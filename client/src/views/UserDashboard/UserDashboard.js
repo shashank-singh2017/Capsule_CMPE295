@@ -89,14 +89,23 @@ class UserDashboard extends Component {
     }
   };
 
-  getManufacturerStatus = user => {
+  getManufacturerStatus = (user, is_declined) => {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 0) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 0 && user_index <= 4) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="success">Completed</Badge>;
     } else if (user_index > 4) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge>Not Available</Badge>;
     }
   };
@@ -105,10 +114,19 @@ class UserDashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 1) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 1) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="success">Completed</Badge>;
     } else {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge>Not Available</Badge>;
     }
   };
@@ -117,10 +135,19 @@ class UserDashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 2) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 2) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="success">Completed</Badge>;
     } else {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge>NotAvailable</Badge>;
     }
   };
@@ -129,10 +156,19 @@ class UserDashboard extends Component {
     const user_index = this.getUserIndex(user);
 
     if (user_index === 3) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 3) {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge color="success">Completed</Badge>;
     } else {
+        if(is_declined === true) {
+            return <Badge color="warning">Declined</Badge>;
+        }
       return <Badge>NotAvailable</Badge>;
     }
   };

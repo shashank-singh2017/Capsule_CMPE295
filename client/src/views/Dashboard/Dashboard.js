@@ -46,7 +46,7 @@ class Dashboard extends Component {
 
   componentDidMount = () => {
     storage.methods
-      .getAllBatchIds()
+      .getallBatchIds()
       .call()
       .then(batchIds => {
         return batchIds;
