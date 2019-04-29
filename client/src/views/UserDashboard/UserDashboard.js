@@ -51,9 +51,10 @@ class UserDashboard extends Component {
             .call()
             .then(cur_batch_detail => {
                 console.log("batch_detail: ", cur_batch_detail);
-              // temp_details["cur_acto"] = cur_party;
+                temp_details["cur_actor"] = cur_batch_detail[6];
+                temp_details['is_declined'] = cur_batch_detail[5];
 
-              // return temp_details;
+              return temp_details;
             })
             .then(data => {
               currentBatches.push(data);
@@ -422,7 +423,6 @@ class UserDashboard extends Component {
       console.log("entry: ", entry);
       console.log("index: ", index);
 
-      if()
       return (
       <tr key={index}>
         <td
