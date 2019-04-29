@@ -417,6 +417,49 @@ class UserDashboard extends Component {
       })
   }
 
+  getRow = (entry, index) => {
+      console.log("entry: ", entry);
+      console.log("index: ", index);
+      return (
+      <tr key={index}>
+        <td
+          key={index}
+          onClick={() => {
+            this.openVerifyModal(entry);
+          }}
+          disabled="true"
+        >
+          {entry["batch_id"]}
+        </td>
+
+        <td>
+          {this.getManufacturerStatus(
+            entry.cur_actor
+          )}
+        </td>
+        <td>
+          {this.getLogisticsStatus(entry.cur_actor)}
+        </td>
+        <td>
+          {this.getRetailerStatus(entry.cur_actor)}
+        </td>
+        <td>
+          {this.getEndUserStatus(entry.cur_actor)}
+        </td>
+        <td
+          onClick={() => {
+            this.openProgressModal(entry);
+          }}
+        >
+          <i
+            className="fa fa-eye fa-md"
+            style={{ marginTop: 0 }}
+          />
+        </td>
+      </tr>
+  );
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -467,41 +510,7 @@ class UserDashboard extends Component {
                           {this.state.batches.length > 0
                             ? this.state.batches.map((entry, index) => {
                                 return (
-                                  <tr key={index}>
-                                    <td
-                                      key={index}
-                                      onClick={() => {
-                                        this.openVerifyModal(entry);
-                                      }}
-                                    >
-                                      {entry["batch_id"]}
-                                    </td>
-
-                                    <td>
-                                      {this.getManufacturerStatus(
-                                        entry.cur_actor
-                                      )}
-                                    </td>
-                                    <td>
-                                      {this.getLogisticsStatus(entry.cur_actor)}
-                                    </td>
-                                    <td>
-                                      {this.getRetailerStatus(entry.cur_actor)}
-                                    </td>
-                                    <td>
-                                      {this.getEndUserStatus(entry.cur_actor)}
-                                    </td>
-                                    <td
-                                      onClick={() => {
-                                        this.openProgressModal(entry);
-                                      }}
-                                    >
-                                      <i
-                                        className="fa fa-eye fa-md"
-                                        style={{ marginTop: 0 }}
-                                      />
-                                    </td>
-                                  </tr>
+                                  this.getRow(entry, index)
                                 );
                               })
                             : this.state.batches.map(entry => {
