@@ -11,7 +11,7 @@ import VerifyBatchLogistics from "../Forms/VerifyBatchLogistics";
 import Progress from "../Progress/Progress";
 import storage from "../../storage";
 
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -50,9 +50,9 @@ class UserDashboard extends Component {
             .getBatch(batchIds[i])
             .call()
             .then(cur_batch_detail => {
-                console.log("batch_detail: ", cur_batch_detail);
-                temp_details["cur_actor"] = cur_batch_detail[6];
-                temp_details['is_declined'] = cur_batch_detail[5];
+              console.log("batch_detail: ", cur_batch_detail);
+              temp_details["cur_actor"] = cur_batch_detail[6];
+              temp_details["is_declined"] = cur_batch_detail[5];
 
               return temp_details;
             })
@@ -404,26 +404,25 @@ class UserDashboard extends Component {
   };
 
   logout = () => {
-      console.log("Logout clicked, localStorage", localStorage);
-      localStorage.setItem("cur_fname", "");
-      localStorage.setItem("cur_lname", "");
-      localStorage.setItem("cur_email", "");
-      localStorage.setItem("cur_type", "");
-      localStorage.setItem("cur_address", "");
+    console.log("Logout clicked, localStorage", localStorage);
+    localStorage.setItem("cur_fname", "");
+    localStorage.setItem("cur_lname", "");
+    localStorage.setItem("cur_email", "");
+    localStorage.setItem("cur_type", "");
+    localStorage.setItem("cur_address", "");
 
-      console.log("localStorage after resetting: ", localStorage);
+    console.log("localStorage after resetting: ", localStorage);
 
-      swal("You have Logged out Successfully!")
-      .then(value => {
-          this.props.history.push('/login');
-      })
-  }
+    swal("You have Logged out Successfully!").then(value => {
+      this.props.history.push("/login");
+    });
+  };
 
   getRow = (entry, index) => {
-      console.log("entry: ", entry);
-      console.log("index: ", index);
+    console.log("entry: ", entry);
+    console.log("index: ", index);
 
-      return (
+    return (
       <tr key={index}>
         <td
           key={index}
@@ -435,33 +434,20 @@ class UserDashboard extends Component {
           {entry["batch_id"]}
         </td>
 
-        <td>
-          {this.getManufacturerStatus(
-            entry.cur_actor
-          )}
-        </td>
-        <td>
-          {this.getLogisticsStatus(entry.cur_actor)}
-        </td>
-        <td>
-          {this.getRetailerStatus(entry.cur_actor)}
-        </td>
-        <td>
-          {this.getEndUserStatus(entry.cur_actor)}
-        </td>
+        <td>{this.getManufacturerStatus(entry.cur_actor)}</td>
+        <td>{this.getLogisticsStatus(entry.cur_actor)}</td>
+        <td>{this.getRetailerStatus(entry.cur_actor)}</td>
+        <td>{this.getEndUserStatus(entry.cur_actor)}</td>
         <td
           onClick={() => {
             this.openProgressModal(entry);
           }}
         >
-          <i
-            className="fa fa-eye fa-md"
-            style={{ marginTop: 0 }}
-          />
+          <i className="fa fa-eye fa-md" style={{ marginTop: 0 }} />
         </td>
       </tr>
-  );
-  }
+    );
+  };
 
   render() {
     return (
@@ -512,9 +498,7 @@ class UserDashboard extends Component {
                         <tbody>
                           {this.state.batches.length > 0
                             ? this.state.batches.map((entry, index) => {
-                                return (
-                                  this.getRow(entry, index)
-                                );
+                                return this.getRow(entry, index);
                               })
                             : this.state.batches.map(entry => {
                                 return <span />;
