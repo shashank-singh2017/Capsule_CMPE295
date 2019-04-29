@@ -38,11 +38,9 @@ class VerifyBatchManufacturer extends Component {
       });
   };
 
-  declineBatch = (batchId) => {
-      console.log("batch Id: ", batchId);
-
-
-  }
+  declineBatch = batchId => {
+    console.log("batch Id: ", batchId);
+  };
 
   render() {
     return (
@@ -161,9 +159,12 @@ class VerifyBatchManufacturer extends Component {
             Verify
           </button>
 
-          <button class="btn btn-danger" onClick={() => {
-              this.declineBatch(this.props.batchId)
-          }}>
+          <button
+            class="btn btn-danger"
+            onClick={() => {
+              this.declineBatch(this.props.batchId);
+            }}
+          >
             Decline
           </button>
         </form>
