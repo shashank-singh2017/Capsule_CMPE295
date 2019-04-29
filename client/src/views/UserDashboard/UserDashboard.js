@@ -47,12 +47,13 @@ class UserDashboard extends Component {
           temp_details["batch_id"] = batchIds[i];
 
           storage.methods
-            .getNextAction(batchIds[i])
+            .getBatch(batchIds[i])
             .call()
-            .then(cur_party => {
-              temp_details["cur_actor"] = cur_party;
+            .then(cur_batch_detail => {
+                console.log("batch_detail: ", cur_batch_detail);
+              // temp_details["cur_acto"] = cur_party;
 
-              return temp_details;
+              // return temp_details;
             })
             .then(data => {
               currentBatches.push(data);
@@ -420,6 +421,8 @@ class UserDashboard extends Component {
   getRow = (entry, index) => {
       console.log("entry: ", entry);
       console.log("index: ", index);
+
+      if()
       return (
       <tr key={index}>
         <td
