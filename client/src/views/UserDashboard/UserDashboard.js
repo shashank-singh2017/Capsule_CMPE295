@@ -98,14 +98,9 @@ class UserDashboard extends Component {
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 0 && user_index <= 4) {
-      if (is_declined === true && user_index === 0) {
-        return <Badge color="danger">Declined</Badge>;
-      }
+
       return <Badge color="success">Completed</Badge>;
     } else if (user_index > 4) {
-      if (is_declined === true) {
-        return <Badge color="danger">Declined</Badge>;
-      }
       return <Badge>Not Available</Badge>;
     }
   };
@@ -119,14 +114,10 @@ class UserDashboard extends Component {
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 1) {
-      if (is_declined === true) {
-        return <Badge color="warning">Declined</Badge>;
-      }
+
       return <Badge color="success">Completed</Badge>;
     } else {
-      if (is_declined === true) {
-        return <Badge color="warning">Declined</Badge>;
-      }
+
       return <Badge>Not Available</Badge>;
     }
   };
@@ -140,14 +131,10 @@ class UserDashboard extends Component {
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 2) {
-      if (is_declined === true) {
-        return <Badge color="warning">Declined</Badge>;
-      }
+
       return <Badge color="success">Completed</Badge>;
     } else {
-      if (is_declined === true) {
-        return <Badge color="warning">Declined</Badge>;
-      }
+
       return <Badge>NotAvailable</Badge>;
     }
   };
@@ -161,14 +148,10 @@ class UserDashboard extends Component {
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 3) {
-      if (is_declined === true) {
-        return <Badge color="warning">Declined</Badge>;
-      }
+
       return <Badge color="success">Completed</Badge>;
     } else {
-      if (is_declined === true) {
-        return <Badge color="warning">Declined</Badge>;
-      }
+      
       return <Badge>NotAvailable</Badge>;
     }
   };
