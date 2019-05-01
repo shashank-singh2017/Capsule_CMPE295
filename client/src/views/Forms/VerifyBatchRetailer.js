@@ -57,7 +57,7 @@ class VerifyBatchRetailer extends Component {
               class="form-control"
               id="fname"
               aria-describedby="emailHelp"
-              placeholder="Enter Manufacturer"
+              placeholder="Enter Arrival Time"
               onChange={event =>
                 this.setState({ arrivalTime: event.target.value })
               }
@@ -72,7 +72,7 @@ class VerifyBatchRetailer extends Component {
               type="text"
               class="form-control"
               id="lname"
-              placeholder="Enter logistics"
+              placeholder="Enter Quantity"
               onChange={event =>
                 this.setState({ quantity: event.target.value })
               }
@@ -88,7 +88,7 @@ class VerifyBatchRetailer extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter Retailer"
+              placeholder="Enter Shipment Number"
               onChange={event =>
                 this.setState({ shipmentNum: event.target.value })
               }
@@ -104,7 +104,7 @@ class VerifyBatchRetailer extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter Retailer"
+              placeholder="Enter Warehouse Name"
               onChange={event =>
                 this.setState({ warehouseName: event.target.value })
               }
@@ -120,7 +120,7 @@ class VerifyBatchRetailer extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter end user"
+              placeholder="Enter Damaged Items Received"
               onChange={event =>
                 this.setState({ damagedItemsRecvd: event.target.value })
               }
@@ -135,7 +135,7 @@ class VerifyBatchRetailer extends Component {
               type="text"
               class="form-control"
               id="eth_add"
-              placeholder="Product Name"
+              placeholder="Damaged Items Quantity"
               onChange={event =>
                 this.setState({ damagedItemsQuantity: event.target.value })
               }
@@ -150,7 +150,7 @@ class VerifyBatchRetailer extends Component {
               type="text"
               class="form-control"
               id="eth_add"
-              placeholder="Product Name"
+              placeholder="Product Id"
               onChange={event =>
                 this.setState({ productId: event.target.value })
               }
@@ -167,10 +167,10 @@ class VerifyBatchRetailer extends Component {
           onClick={() => {
             this.declineBatch(this.props.batchId);
           }}
+          style={{ float: "right" }}
         >
           Decline
         </button>
-
       </div>
     );
   }

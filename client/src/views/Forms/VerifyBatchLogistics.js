@@ -57,7 +57,7 @@ class VerifyBatchLogistics extends Component {
               class="form-control"
               id="fname"
               aria-describedby="emailHelp"
-              placeholder="Enter Manufacturer"
+              placeholder="Enter Destination Name"
               onChange={event =>
                 this.setState({ destinationName: event.target.value })
               }
@@ -72,7 +72,7 @@ class VerifyBatchLogistics extends Component {
               type="text"
               class="form-control"
               id="lname"
-              placeholder="Enter logistics"
+              placeholder="Enter Destination Address"
               onChange={event =>
                 this.setState({ destinationAddress: event.target.value })
               }
@@ -88,7 +88,7 @@ class VerifyBatchLogistics extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter Retailer"
+              placeholder="Enter Shipment Number"
               onChange={event =>
                 this.setState({ shipmentNum: event.target.value })
               }
@@ -104,7 +104,7 @@ class VerifyBatchLogistics extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter Retailer"
+              placeholder="Enter Quantity"
               onChange={event =>
                 this.setState({ quantity: event.target.value })
               }
@@ -120,7 +120,7 @@ class VerifyBatchLogistics extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter end user"
+              placeholder="Enter Departure Time"
               onChange={event =>
                 this.setState({ departureTime: event.target.value })
               }
@@ -135,7 +135,7 @@ class VerifyBatchLogistics extends Component {
               type="text"
               class="form-control"
               id="eth_add"
-              placeholder="Product Name"
+              placeholder="Estimated Arrival Time"
               onChange={event =>
                 this.setState({ estimatedArrivalTime: event.target.value })
               }
@@ -150,7 +150,7 @@ class VerifyBatchLogistics extends Component {
               type="text"
               class="form-control"
               id="eth_add"
-              placeholder="Product Name"
+              placeholder="Product Id"
               onChange={event =>
                 this.setState({ productId: event.target.value })
               }
@@ -167,6 +167,7 @@ class VerifyBatchLogistics extends Component {
           onClick={() => {
             this.declineBatch(this.props.batchId);
           }}
+          style={{ float: "right" }}
         >
           Decline
         </button>

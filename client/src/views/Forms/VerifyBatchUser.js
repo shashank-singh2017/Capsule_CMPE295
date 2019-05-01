@@ -58,7 +58,7 @@ class VerifyBatchUser extends Component {
               class="form-control"
               id="fname"
               aria-describedby="emailHelp"
-              placeholder="Enter Manufacturer"
+              placeholder="Enter Drug Name"
               onChange={event =>
                 this.setState({ drugName: event.target.value })
               }
@@ -73,7 +73,7 @@ class VerifyBatchUser extends Component {
               type="text"
               class="form-control"
               id="lname"
-              placeholder="Enter logistics"
+              placeholder="Enter Quantity"
               onChange={event =>
                 this.setState({ quantity: event.target.value })
               }
@@ -89,7 +89,7 @@ class VerifyBatchUser extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter Retailer"
+              placeholder="Enter Arrival Time"
               onChange={event =>
                 this.setState({ arrivalTime: event.target.value })
               }
@@ -105,7 +105,7 @@ class VerifyBatchUser extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter Retailer"
+              placeholder="Product Id"
               onChange={event =>
                 this.setState({ productId: event.target.value })
               }
@@ -121,7 +121,7 @@ class VerifyBatchUser extends Component {
               class="form-control"
               id="email"
               aria-describedby="emailHelp"
-              placeholder="Enter end user"
+              placeholder="Product Quality Rating"
               onChange={event =>
                 this.setState({ productQualityRating: event.target.value })
               }
@@ -136,7 +136,7 @@ class VerifyBatchUser extends Component {
               type="text"
               class="form-control"
               id="eth_add"
-              placeholder="Product Name"
+              placeholder="Delivery Metrics Rating"
               onChange={event =>
                 this.setState({ deliveryMetricsRating: event.target.value })
               }
@@ -151,7 +151,7 @@ class VerifyBatchUser extends Component {
               type="text"
               class="form-control"
               id="eth_add"
-              placeholder="Product Name"
+              placeholder="Review Comments"
               onChange={event =>
                 this.setState({ reviewComments: event.target.value })
               }
@@ -168,10 +168,10 @@ class VerifyBatchUser extends Component {
           onClick={() => {
             this.declineBatch(this.props.batchId);
           }}
+          style={{ float: "right" }}
         >
           Decline
         </button>
-
       </div>
     );
   }

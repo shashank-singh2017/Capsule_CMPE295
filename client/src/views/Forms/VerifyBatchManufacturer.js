@@ -160,26 +160,16 @@ class VerifyBatchManufacturer extends Component {
           <button type="submit" class="btn btn-primary">
             Verify
           </button>
-
-          <button
-            class="btn btn-danger"
-            onClick={() => {
-              this.declineBatch(this.props.batchId);
-            }}
-          >
-            Decline
-          </button>
         </form>
-
         <button
           class="btn btn-danger"
           onClick={() => {
             this.declineBatch(this.props.batchId);
           }}
+          style={{ float: "right" }}
         >
           Decline
         </button>
-        
       </div>
     );
   }
