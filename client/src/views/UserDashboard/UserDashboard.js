@@ -16,7 +16,7 @@ import swal from "sweetalert";
 class UserDashboard extends Component {
   constructor(props) {
     super(props);
-
+ 
     this.state = {
       fname: localStorage.getItem("cur_fname"),
       lname: localStorage.getItem("cur_lname"),
@@ -34,47 +34,47 @@ class UserDashboard extends Component {
   }
 
   componentDidMount = () => {
-    if (
-      localStorage.getItem("cur_address") === null ||
-      localStorage.getItem("cur_address").length === 0
-    ) {
-      swal("You are not logged in!!").then(() => {
-        this.props.history.push("/login");
-      });
-    } else {
-      storage.methods
-        .getUserBatchIds(this.state.address)
-        .call()
-        .then(batchIds => {
-          return batchIds;
+    if(localStorage.getItem('cur_address') === null || localStorage.getItem('cur_address').length === 0) {
+        swal('You are not logged in!!')
+        .then(() => {
+            this.props.history.push('/login');
         })
-        .then(batchIds => {
-          let currentBatches = [];
-          for (var i = 0; i < batchIds.length; i++) {
-            let temp_details = {};
-            temp_details["batch_id"] = batchIds[i];
-
-            storage.methods
-              .getBatch(batchIds[i])
-              .call()
-              .then(cur_batch_detail => {
-                temp_details["cur_actor"] = cur_batch_detail[6];
-                temp_details["is_declined"] = cur_batch_detail[5];
-
-                return temp_details;
-              })
-              .then(data => {
-                currentBatches.push(data);
-
-                if (currentBatches.length === batchIds.length) {
-                  this.setState({
-                    batches: currentBatches
-                  });
-                }
-              });
-          }
-        });
     }
+    else {
+    storage.methods
+      .getUserBatchIds(this.state.address)
+      .call()
+      .then(batchIds => {
+        return batchIds;
+      })
+      .then(batchIds => {
+        let currentBatches = [];
+        for (var i = 0; i < batchIds.length; i++) {
+          let temp_details = {};
+          temp_details["batch_id"] = batchIds[i];
+
+          storage.methods
+            .getBatch(batchIds[i])
+            .call()
+            .then(cur_batch_detail => {
+
+              temp_details["cur_actor"] = cur_batch_detail[6];
+              temp_details["is_declined"] = cur_batch_detail[5];
+
+              return temp_details;
+            })
+            .then(data => {
+              currentBatches.push(data);
+
+              if (currentBatches.length === batchIds.length) {
+                this.setState({
+                  batches: currentBatches
+                });
+              }
+            });
+        }
+      });
+  }
   };
 
   getUserIndex = user => {
@@ -102,6 +102,7 @@ class UserDashboard extends Component {
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 0 && user_index <= 4) {
+
       return <Badge color="success">Completed</Badge>;
     } else if (user_index > 4) {
       return <Badge>Not Available</Badge>;
@@ -113,12 +114,14 @@ class UserDashboard extends Component {
 
     if (user_index === 1) {
       if (is_declined === true) {
-        return <Badge color="danger">Declined</Badge>;
+        return <Badge color="warning">Declined</Badge>;
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 1) {
+
       return <Badge color="success">Completed</Badge>;
     } else {
+
       return <Badge>Not Available</Badge>;
     }
   };
@@ -128,12 +131,14 @@ class UserDashboard extends Component {
 
     if (user_index === 2) {
       if (is_declined === true) {
-        return <Badge color="danger">Declined</Badge>;
+        return <Badge color="warning">Declined</Badge>;
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 2) {
+
       return <Badge color="success">Completed</Badge>;
     } else {
+
       return <Badge>NotAvailable</Badge>;
     }
   };
@@ -143,12 +148,14 @@ class UserDashboard extends Component {
 
     if (user_index === 3) {
       if (is_declined === true) {
-        return <Badge color="danger">Declined</Badge>;
+        return <Badge color="warning">Declined</Badge>;
       }
       return <Badge color="warning">In Process</Badge>;
     } else if (user_index > 3) {
+
       return <Badge color="success">Completed</Badge>;
     } else {
+
       return <Badge>NotAvailable</Badge>;
     }
   };
@@ -420,6 +427,7 @@ class UserDashboard extends Component {
   };
 
   logout = () => {
+
     localStorage.setItem("cur_fname", "");
     localStorage.setItem("cur_lname", "");
     localStorage.setItem("cur_email", "");
@@ -432,6 +440,7 @@ class UserDashboard extends Component {
   };
 
   getRow = (entry, index) => {
+
     if (entry.is_declined === true) {
       return (
         <tr key={index} style={{ backgroundColor: "red" }}>
@@ -482,16 +491,17 @@ class UserDashboard extends Component {
   };
 
   render() {
-    if (
-      localStorage.getItem("cur_address") === null ||
-      localStorage.getItem("cur_address").length === 0
-    ) {
-      swal("You are not logged in!!").then(() => {
-        this.props.history.push("/login");
-      });
+      if(localStorage.getItem('cur_address') === null || localStorage.getItem('cur_address').length === 0) {
+          swal('You are not logged in!!')
+          .then(() => {
+              this.props.history.push('/login');
+          })
 
-      return <div />;
-    }
+        return (
+            <div>
+            </div>
+        );
+      }
     return (
       <div className="animated fadeIn">
         <Header logout={this.logout} />
